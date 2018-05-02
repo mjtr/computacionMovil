@@ -75,7 +75,7 @@ public class PlayerEntity extends Actor {
         setSize(PIXELS_IN_METER, PIXELS_IN_METER);
     }
 
-    @Override
+
     public void draw(Batch batch, float parentAlpha) {
 
         setPosition((body.getPosition().x - 0.5f) * PIXELS_IN_METER,
@@ -83,14 +83,14 @@ public class PlayerEntity extends Actor {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
-    @Override
+
     public void act(float delta) {
         //Orientation orientation = Gdx.input.getNativeOrientation();
 
                 acelX += Gdx.input.getAccelerometerY();
                 acelY -= Gdx.input.getAccelerometerX();
 
-        body.setLinearVelocity(acelX * 0.01f,acelY * 0.01f);
+        body.setLinearVelocity(acelX * 0.02f,acelY * 0.02f);
 
 
 

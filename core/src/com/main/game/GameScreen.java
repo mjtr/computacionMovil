@@ -52,7 +52,6 @@ public class GameScreen extends BaseScreen {
         world = new World(new Vector2(0,0),true);
     }
 
-    @Override
     public void show() {
 
         playerTexture = game.getManager().get("ballpeq.png");
@@ -65,7 +64,6 @@ public class GameScreen extends BaseScreen {
 
         world.setContactListener(new ContactListener() {
 
-            @Override
             public void beginContact(Contact contact) {
             if(areCollided(contact,"player" , "finish")){
                 stage.addAction(
@@ -84,7 +82,6 @@ public class GameScreen extends BaseScreen {
 
             }
 
-            @Override
             public void endContact(Contact contact) {
                 System.out.println("Ya no hay colisión");
                 player.setHayColision(false);
@@ -93,12 +90,10 @@ public class GameScreen extends BaseScreen {
 
             }
 
-            @Override
             public void preSolve(Contact contact, Manifold oldManifold) {
 
             }
 
-            @Override
             public void postSolve(Contact contact, ContactImpulse impulse) {
 
             }
@@ -303,7 +298,6 @@ public class GameScreen extends BaseScreen {
 
     }
 
-    @Override
     public void hide() {
         player.detach();
         player.remove();
@@ -316,7 +310,6 @@ public class GameScreen extends BaseScreen {
         fin.remove();
     }
 
-    @Override
     public void render(float delta) {
 
         Gdx.gl.glClearColor(0.8f,0.5f,0.5f,1f);
@@ -329,7 +322,7 @@ public class GameScreen extends BaseScreen {
     }
 
 
-    @Override
+
     public void dispose() {
         stage.dispose();
         world.dispose();

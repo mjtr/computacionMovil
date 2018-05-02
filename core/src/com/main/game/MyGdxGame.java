@@ -17,7 +17,7 @@ public class MyGdxGame extends Game {
 		return manager;
 	}
 
-	@Override
+	
 	public void create() {
 
 		manager = new AssetManager();

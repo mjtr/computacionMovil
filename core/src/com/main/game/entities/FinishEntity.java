@@ -50,7 +50,7 @@ public class FinishEntity extends Actor {
         this.tocaFin = tocaFin;
     }
 
-    @Override
+
     public void act(float delta) {
         if(tocaFin == true){
 
@@ -58,7 +58,6 @@ public class FinishEntity extends Actor {
         }
     }
 
-    @Override
     public void draw(Batch batch, float parentAlpha) {
         setPosition( (body.getPosition().x - 0.5f)* PIXELS_IN_METER , (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
         batch.draw(texture,getX(),getY(), getWidth(),getHeight());
