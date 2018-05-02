@@ -30,6 +30,7 @@ public class EndLevelScreen extends BaseScreen {
         retry = new TextButton("Retry", skin);
         menu = new TextButton("Menu", skin);
 
+
         retry.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

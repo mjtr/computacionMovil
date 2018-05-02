@@ -54,7 +54,7 @@ public class GameScreen extends BaseScreen {
 
     public void show() {
 
-        playerTexture = game.getManager().get("ballpeq.png");
+        playerTexture = game.getManager().get("ball.png");
         wallTexture = game.getManager().get("wallRedPeq.png");
         finishTexture = game.getManager().get("finish.png");
 
@@ -72,7 +72,7 @@ public class GameScreen extends BaseScreen {
                                 Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
-                                        game.setScreen(game.endLevelScreen);
+                                        game.setScreen(game.gameLevel2Screen);
                                     }
                                 })
                         )
