@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.PlayerEntity;
 import com.main.game.entities.WallEntity;
@@ -29,7 +30,9 @@ public class GameLevel2Screen extends BaseScreen {
     private FinishEntity finish;
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
 
-    private Texture playerTexture, finishTexture , wallTexture ;
+    private BlackHoleEntity hole;
+
+    private Texture playerTexture, finishTexture , wallTexture ,holeTexture;
 
 
     public GameLevel2Screen(MyGdxGame game) {
@@ -44,11 +47,13 @@ public class GameLevel2Screen extends BaseScreen {
         playerTexture = game.getManager().get("ball.png");
         finishTexture = game.getManager().get("finish.png");
         wallTexture = game.getManager().get("wallYellow.png");
-
+        holeTexture = game.getManager().get("hole.png");
 
         finish = new FinishEntity(world,finishTexture,new Vector2(3.0f,1.3f));
 
         player = new PlayerEntity(world,playerTexture, new Vector2(11.30f,13.2f));
+
+        hole = new BlackHoleEntity(world,holeTexture, new Vector2(15,13));
 
         world.setContactListener(new ContactListener() {
 
@@ -58,9 +63,9 @@ public class GameLevel2Screen extends BaseScreen {
                             Actions.sequence(
                                     Actions.delay(1.5f),
                                     Actions.run(new Runnable() {
-                                        @Override
+
                                         public void run() {
-                                            game.setScreen(game.endLevelScreen);
+                                            game.setScreen(game.gameOverScreen);
                                         }
                                     })
                             )
@@ -68,13 +73,25 @@ public class GameLevel2Screen extends BaseScreen {
 
                 }
 
+                if(areCollided(contact,"player","hole")){
+                    player.setAlive(false);
+
+                    stage.addAction(
+                            Actions.sequence(
+                                    Actions.delay(1f),
+                                    Actions.run(new Runnable() {
+
+                                        public void run() {
+                                            game.setScreen(game.gameOverScreen);
+                                        }
+                                    })
+                            )
+                    );
+                }
+
             }
 
             public void endContact(Contact contact) {
-                System.out.println("Ya no hay colisión");
-                player.setHayColision(false);
-                finish.setTocaFin(false);
-
 
             }
 
@@ -274,6 +291,7 @@ public class GameLevel2Screen extends BaseScreen {
         //Añadimos todos los actores
         stage.addActor(player);
         stage.addActor(finish);
+        stage.addActor(hole);
 
         for (WallEntity wall : listWall){
             stage.addActor(wall);
@@ -288,6 +306,9 @@ public class GameLevel2Screen extends BaseScreen {
 
         finish.detach();
         finish.remove();
+
+        hole.detach();
+        hole.remove();
 
         listWall.clear();
     }

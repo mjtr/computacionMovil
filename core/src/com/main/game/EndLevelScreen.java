@@ -3,10 +3,8 @@ package com.main.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -18,7 +16,7 @@ public class EndLevelScreen extends BaseScreen {
 
     private Skin skin;
 
-    private TextButton retry, menu;
+    private TextButton nextLevel, menu;
 
     public EndLevelScreen(final MyGdxGame game) {
         super(game);
@@ -27,32 +25,32 @@ public class EndLevelScreen extends BaseScreen {
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        retry = new TextButton("Retry", skin);
+        nextLevel = new TextButton("NextLevel", skin);
         menu = new TextButton("Menu", skin);
 
 
-        retry.addCaptureListener(new ChangeListener() {
-            @Override
+        nextLevel.addCaptureListener(new ChangeListener() {
+
             public void changed(ChangeEvent event, Actor actor) {
 
-                game.setScreen(game.gameScreen);
+                game.setScreen(game.gameLevel2Screen);
             }
         });
 
         menu.addCaptureListener(new ChangeListener() {
-            @Override
+
             public void changed(ChangeEvent event, Actor actor) {
 
                 game.setScreen(game.menuScreen);
             }
         });
 
-        retry.setSize(200, 80);
+        nextLevel.setSize(200, 80);
         menu.setSize(200, 80);
-        retry.setPosition(60, 50);
+        nextLevel.setPosition(60, 50);
         menu.setPosition(380, 50);
 
-        stage.addActor(retry);
+        stage.addActor(nextLevel);
         stage.addActor(menu);
     }
 

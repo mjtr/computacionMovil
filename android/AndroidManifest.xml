@@ -3,6 +3,9 @@
     package="com.main.game" >
 
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true" />
+
     <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="27" />
     <application
     android:allowBackup="true"

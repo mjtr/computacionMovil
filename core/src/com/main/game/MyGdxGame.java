@@ -10,7 +10,7 @@ public class MyGdxGame extends Game {
 
 	private AssetManager manager;
 
-	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen, gameLevel2Screen;
+	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen, gameLevel2Screen, gameOverScreen;
 
 
 	public AssetManager getManager() {
@@ -26,10 +26,12 @@ public class MyGdxGame extends Game {
 		manager.load("ballpeq.png", Texture.class);
 		manager.load("finish.png", Texture.class);
 		manager.load("ball.png", Texture.class);
+		manager.load("hole.png" ,Texture.class);
 
 
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
+
 		//manager.finishLoading();
 		//setScreen(new GameLevel2Screen(this));
 	}
@@ -39,6 +41,7 @@ public class MyGdxGame extends Game {
 		gameScreen = new GameScreen(this);
 		endLevelScreen = new EndLevelScreen(this);
 		gameLevel2Screen = new GameLevel2Screen(this);
+		gameOverScreen = new GameOverScreen(this);
 		setScreen(menuScreen);
 	}
 

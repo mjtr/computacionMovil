@@ -1,13 +1,9 @@
 package com.main.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
@@ -16,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.PlayerEntity;
 import com.main.game.entities.WallEntity;
@@ -39,12 +36,8 @@ public class GameScreen extends BaseScreen {
 
     private boolean collision = false;
 
-    /*
-    private OrthographicCamera camera;
-    private Box2DDebugRenderer renderer;
 
-    private Vector3 position;
-*/
+
     public GameScreen(MyGdxGame game) {
         super(game);
 
@@ -57,6 +50,8 @@ public class GameScreen extends BaseScreen {
         playerTexture = game.getManager().get("ball.png");
         wallTexture = game.getManager().get("wallRedPeq.png");
         finishTexture = game.getManager().get("finish.png");
+
+
 
         player = new PlayerEntity(world,playerTexture, new Vector2(3.0f,1.3f));
 
@@ -72,7 +67,7 @@ public class GameScreen extends BaseScreen {
                                 Actions.run(new Runnable() {
                                     @Override
                                     public void run() {
-                                        game.setScreen(game.gameLevel2Screen);
+                                        game.setScreen(game.endLevelScreen);
                                     }
                                 })
                         )
@@ -80,20 +75,29 @@ public class GameScreen extends BaseScreen {
 
                 }
 
+             if(areCollided(contact,"player","hole")){
+                    player.setAlive(false);
+
+             stage.addAction(
+                     Actions.sequence(
+                             Actions.delay(1f),
+                             Actions.run(new Runnable() {
+
+                                 public void run() {
+                                     game.setScreen(game.gameOverScreen);
+                                 }
+                             })
+                     )
+             );
+             }
             }
 
             public void endContact(Contact contact) {
-                System.out.println("Ya no hay colisión");
-                player.setHayColision(false);
-                fin.setTocaFin(false);
-
 
             }
-
             public void preSolve(Contact contact, Manifold oldManifold) {
 
             }
-
             public void postSolve(Contact contact, ContactImpulse impulse) {
 
             }

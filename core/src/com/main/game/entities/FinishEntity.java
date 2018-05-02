@@ -52,10 +52,7 @@ public class FinishEntity extends Actor {
 
 
     public void act(float delta) {
-        if(tocaFin == true){
 
-            System.out.println("Has llegado al punto correcto");
-        }
     }
 
     public void draw(Batch batch, float parentAlpha) {
