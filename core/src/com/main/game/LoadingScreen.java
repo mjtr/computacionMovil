@@ -24,7 +24,7 @@ public class LoadingScreen extends BaseScreen {
         stage.addActor(loading);
     }
 
-    @Override
+
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -41,7 +41,7 @@ public class LoadingScreen extends BaseScreen {
         stage.draw();
     }
 
-    @Override
+
     public void dispose() {
         stage.dispose();
         skin.dispose();

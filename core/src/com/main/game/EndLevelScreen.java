@@ -55,25 +55,25 @@ public class EndLevelScreen extends BaseScreen {
         stage.addActor(menu);
     }
 
-    @Override
+
     public void show() {
 
         Gdx.input.setInputProcessor(stage);
     }
 
-    @Override
+
     public void hide() {
 
         Gdx.input.setInputProcessor(null);
     }
 
-    @Override
+
     public void dispose() {
         skin.dispose();
         stage.dispose();
     }
 
-    @Override
+
     public void render(float delta) {
         Gdx.gl.glClearColor(0.4f, 0.5f, 0.8f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

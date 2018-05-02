@@ -39,24 +39,24 @@ public class MenuScreen extends BaseScreen{
         stage.addActor(play);
     }
 
-    @Override
+
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
 
-    @Override
+
     public void hide() {
         Gdx.input.setInputProcessor(null);
     }
 
-    @Override
+
     public void dispose() {
 
         stage.dispose();
         skin.dispose();
     }
 
-    @Override
+
     public void render(float delta) {
         Gdx.gl.glClearColor(0.2f, 0.3f, 0.5f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
