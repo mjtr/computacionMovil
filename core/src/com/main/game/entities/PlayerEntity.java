@@ -21,7 +21,6 @@ public class PlayerEntity extends Actor {
 
     private float acelX, acelY ,speedx, zAngle , speedy;
 
-
     private boolean hayAcel = true;
 
     private Texture texture;
@@ -31,8 +30,8 @@ public class PlayerEntity extends Actor {
     private Body body;
 
     private Fixture fixture;
-    private boolean isAlive = true;
 
+    private boolean isAlive = true;
 
     public boolean isAlive() {
         return isAlive;
@@ -88,6 +87,8 @@ public class PlayerEntity extends Actor {
             //speedy = Gdx.input.getPitch();
 
             body.setLinearVelocity(acelX * 0.02f, acelY * 0.02f);
+            //body.setLinearVelocity(acelX * delta +1, acelY * delta + 1);
+
             // body.setLinearVelocity(acelX * 0.02f ,acelY * 0.02f - (speedy*0.01f));
         }
 
