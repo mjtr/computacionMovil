@@ -45,9 +45,6 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-
-
-
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
         stage  = new Stage(new FillViewport(640,360));
@@ -124,18 +121,8 @@ public class GameLevel3Screen extends BaseScreen{
             }
         });
 
-        /***********Perímetro de la fase**********/
-        creacionPerimetro();
 
-        /**************** Primer cuadrante ***********/
-        primerCuadrante();
-
-        /**************** Segundo cuadrante ***********/
-
-        segundoCuadrante();
-
-        /****************TERCER CUADRANTE*************/
-
+        creacionEscenario();
 
 
 
@@ -149,6 +136,7 @@ public class GameLevel3Screen extends BaseScreen{
             stage.addActor(wall);
         }
 
+        System.out.println("Número de muros totales hasta ahora: " + listWall.size());
         /*for(GreenWallEntity wall : specialWall){
             stage.addActor(wall);
         }*/
@@ -212,6 +200,59 @@ public class GameLevel3Screen extends BaseScreen{
 
         return (( userDataA.equals(userA) && userDataB.equals(userB))
                 || userDataA.equals(userB) && userDataB.equals(userA) );
+
+    }
+
+
+    private void creacionEscenario(){
+
+        /***********Perímetro de la fase**********/
+        creacionPerimetro();
+
+        /**************** Primer cuadrante ***********/
+        primerCuadrante();
+
+        /**************** Segundo cuadrante ***********/
+
+        segundoCuadrante();
+
+        /****************TERCER CUADRANTE*************/
+
+        tercerCuadrante();
+
+        /****************CUARTO CUADRANTE*************/
+
+        cuartoCuadrante();
+
+        /****************QUINTO CUADRANTE*************/
+
+        quintoCuadrante();
+
+        /****************SEXTO CUADRANTE*************/
+
+        sextoCuadrante();
+
+        /****************SÉPTIMO CUADRANTE*************/
+
+        septimoCuadrante();
+
+        /****************OCTAVO CUADRANTE*************/
+
+        octavoCuadrante();
+
+        /****************NOVENO CUADRANTE*************/
+
+        novenoCuadrante();
+
+        /****************DÉCIMO CUADRANTE*************/
+
+        decimoCuadrante();
+
+        /****************FINAL CUADRANTE*************/
+
+        finalCuadrante();
+
+
 
     }
 
@@ -394,8 +435,7 @@ public class GameLevel3Screen extends BaseScreen{
         listWall.add(new WallEntity(world, wallTexture,60.4f,0f));
         listWall.add(new WallEntity(world, wallTexture,61.3f,0f));
         listWall.add(new WallEntity(world, wallTexture,62.2f,0f));
-        // listWall.add(new WallEntity(world, wallTexture,63.1f,0f));
-        //listWall.add(new WallEntity(world, wallTexture,64.0f,0f));
+
 
 
 
@@ -474,6 +514,7 @@ public class GameLevel3Screen extends BaseScreen{
 
 
     }
+
         private void primerCuadrante(){
 
             /**************** Primer cuadrante ***********/
@@ -537,14 +578,27 @@ public class GameLevel3Screen extends BaseScreen{
             listWall.add(new WallEntity(world, wallTexture,52.3f,31.20f));
             listWall.add(new WallEntity(world, wallTexture,53.2f,31.20f));
             listWall.add(new WallEntity(world, wallTexture,54.1f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,55.0f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,55.9f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,57.7f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,58.6f,31.20f));
+            listWall.add(new WallEntity(world, wallTexture,59.5f,31.20f));
+
 
 
         }
+
         private void segundoCuadrante(){
 
             /**************** Segundo cuadrante ***********/
 
-            listWall.add(new WallEntity(world, wallTexture,17.2f,30.40f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,14.40f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,16.80f));
             listWall.add(new WallEntity(world, wallTexture,17.2f,17.60f));
             listWall.add(new WallEntity(world, wallTexture,17.2f,18.40f));
             listWall.add(new WallEntity(world, wallTexture,17.2f,19.20f));
@@ -561,6 +615,708 @@ public class GameLevel3Screen extends BaseScreen{
             listWall.add(new WallEntity(world, wallTexture,17.2f,28.00f));
             listWall.add(new WallEntity(world, wallTexture,17.2f,28.80f));
             listWall.add(new WallEntity(world, wallTexture,17.2f,29.60f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,30.40f));
+
+
+        }
+
+        private void tercerCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,1.9f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,2.8f,24.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,3.7f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,4.6f,25.60f));
+
+            listWall.add(new WallEntity(world, wallTexture,5.50f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,6.40f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,7.30f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,26.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,1.9f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,2.8f,21.60f));
+
+            listWall.add(new WallEntity(world, wallTexture,3.7f,22.40f));
+            listWall.add(new WallEntity(world, wallTexture,4.6f,22.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,5.5f,23.20f));
+            listWall.add(new WallEntity(world, wallTexture,6.4f,23.20f));
+
+            listWall.add(new WallEntity(world, wallTexture,7.30f,23.20f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,24.00f));
+
+            listWall.add(new WallEntity(world, wallTexture,10.0f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,25.60f));
+
+        }
+
+        private void cuartoCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,16.3f,20.00f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,20.00f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,13.6f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,12.7f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,20.80f));
+
+            //parte de abajo del cuarto cuadrante
+            listWall.add(new WallEntity(world, wallTexture,16.3f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,13.6f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,12.7f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,7.30f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,6.40f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,5.50f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,12.80f));
+
+
+
+
+
+
+        }
+
+        private void quintoCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,1.90f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,2.80f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,3.70f,18.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,4.60f,17.60f));
+
+            listWall.add(new WallEntity(world, wallTexture,5.50f,16.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,6.40f,16.00f));
+
+            listWall.add(new WallEntity(world, wallTexture, 7.30f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture, 8.20f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture, 9.10f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,10.00f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,10.90f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,11.80f,15.20f));
+
+            listWall.add(new WallEntity(world, wallTexture,11.80f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,11.80f,16.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,10.90f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.00f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,18.40f));
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        private void sextoCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,1.90f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,2.80f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,3.70f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,5.50f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,6.40f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,7.30f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,12.7f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,13.6f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,16.3f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,18.1f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,19.0f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,19.9f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,10.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,28.0f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,10.40f));
+
+
+            listWall.add(new WallEntity(world, wallTexture,1.90f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,2.80f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,3.70f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,5.50f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,6.40f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,7.30f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,12.7f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,13.6f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,16.3f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,18.1f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,19.0f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,19.9f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,8.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,28.0f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,8.80f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,8.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,46.0f,9.60f));
+
+        }
+
+        private void septimoCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,16.3f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,25.60f));
+            //Este es el que hay que hacerlo destructible
+            listWall.add(new WallEntity(world, wallTexture,13.6f,25.60f));
+            //
+            listWall.add(new WallEntity(world, wallTexture,12.7f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,25.60f));
+
+
+        }
+
+        private void octavoCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,4.60f,8.00f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,7.20f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,5.60f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,4.80f));
+            listWall.add(new WallEntity(world, wallTexture,4.60f,4.00f));
+
+
+
+            //listWall.add(new WallEntity(world, wallTexture,5.50f,6.40f));
+            //listWall.add(new WallEntity(world, wallTexture,6.40f,6.40f));
+            //listWall.add(new WallEntity(world, wallTexture,7.30f,6.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,8.20f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,9.10f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,10.0f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,6.40f));
+
+            //listWall.add(new WallEntity(world, wallTexture,11.8f,6.40f));
+            //listWall.add(new WallEntity(world, wallTexture,12.7f,6.40f));
+            //listWall.add(new WallEntity(world, wallTexture,13.6f,6.40f));
+
+
+            listWall.add(new WallEntity(world, wallTexture,8.20f,5.60f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,4.80f));
+            listWall.add(new WallEntity(world, wallTexture,8.20f,4.00f));
+
+            listWall.add(new WallEntity(world, wallTexture,7.30f,4.00f));
+            listWall.add(new WallEntity(world, wallTexture,6.40f,4.00f));
+            listWall.add(new WallEntity(world, wallTexture,5.50f,4.00f));
+
+
+            listWall.add(new WallEntity(world, wallTexture,10.9f,5.60f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,4.80f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,4.00f));
+            listWall.add(new WallEntity(world, wallTexture,10.9f,3.20f));
+
+
+            //parte muro de abajo
+
+            listWall.add(new WallEntity(world, wallTexture,10.9f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,11.8f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,12.7f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,13.6f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,14.5f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,16.3f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,18.1f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,19.0f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,19.9f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,3.20f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,3.20f));
+
+
+
+
+            //unión del los dos muros
+
+            listWall.add(new WallEntity(world, wallTexture,43.3f,5.60f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,4.80f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,4.00f));
+                //parte muro de arriba
+
+            listWall.add(new WallEntity(world, wallTexture,14.5f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,15.4f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,16.3f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,17.2f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,18.1f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,19.0f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,19.9f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,6.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,28.0f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,46.9f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,47.8f,6.40f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,6.40f));
+
+        }
+
+        private void novenoCuadrante(){
+
+
+            //Muro vertical zona derecha
+
+            listWall.add(new WallEntity(world, wallTexture,49.6f, 6.40f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f, 7.20f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f, 8.00f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f, 8.80f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f, 9.60f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,11.20f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,12.00f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,12.80f));
+
+
+            //Muro horizontal down
+
+            listWall.add(new WallEntity(world, wallTexture,20.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,46.9f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,47.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,50.5f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,51.4f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,52.3f,12.80f));
+
+
+            //Muro vertical iquierdo
+            listWall.add(new WallEntity(world, wallTexture,20.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,14.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,16.80f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,19.20f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,20.00f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,22.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,23.20f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,27.20f));
+            listWall.add(new WallEntity(world, wallTexture,20.8f,28.00f));
+
+            //muro horizontal up
+
+            listWall.add(new WallEntity(world, wallTexture,20.8f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,21.7f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,46.9f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,47.8f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,50.5f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,51.4f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,52.3f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,28.00f));
+
+
+            //Muro vertical derecho
+
+
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 5.60f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 6.40f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 7.20f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 8.00f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 8.80f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f, 9.60f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,11.20f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,12.00f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,14.40f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,16.80f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,17.60f));
+
+
+
+            listWall.add(new WallEntity(world, wallTexture,53.2f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,22.40f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,23.20f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,27.20f));
+            listWall.add(new WallEntity(world, wallTexture,53.2f,28.00f));
+
+
+
+
+        }
+
+        private void decimoCuadrante(){
+
+
+            //Muro horizontal mid up
+
+            listWall.add(new WallEntity(world, wallTexture,22.6f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,20.80f));
+
+            listWall.add(new WallEntity(world, wallTexture,47.8f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,50.5f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,51.4f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,52.3f,20.80f));
+
+
+            //Muro horizontal mid down
+
+            listWall.add(new WallEntity(world, wallTexture,26.2f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,17.60f));
+
+            listWall.add(new WallEntity(world, wallTexture,47.8f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,50.5f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,51.4f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,52.3f,17.60f));
+
+            //Cajon mid up
+
+
+            listWall.add(new WallEntity(world, wallTexture,22.6f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,14.40f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,16.80f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,19.20f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,20.00f));
+
+            listWall.add(new WallEntity(world, wallTexture,22.6f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,22.6f,26.40f));
+
+
+            //Cajon mid down
+
+            listWall.add(new WallEntity(world, wallTexture,26.2f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,14.40f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,16.80f));
+
+            //muro horizontal top down
+
+            listWall.add(new WallEntity(world, wallTexture,22.6f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,23.5f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,24.4f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,25.3f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,26.2f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,27.1f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,28.0f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,28.9f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,29.8f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,30.7f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,31.6f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,32.5f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,33.4f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,34.3f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,35.2f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,36.1f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,37.0f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,37.9f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,38.8f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,39.7f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,40.6f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,41.5f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,42.4f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,43.3f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,44.2f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,45.1f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,46.0f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,46.9f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,47.8f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,48.7f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,49.6f,24.00f));
+
+
+        }
+
+        private void finalCuadrante(){
+
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 3.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 4.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 4.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 5.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 6.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 7.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 8.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 8.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 9.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,10.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,11.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,12.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,12.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,13.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,14.40f));
+
+            listWall.add(new WallEntity(world, wallTexture,56.8f,15.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,16.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,16.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,17.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,18.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,19.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,20.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,20.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,21.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,22.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,23.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,24.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,24.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,25.60f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,26.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,27.20f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,28.00f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,28.80f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f,29.60f));
+
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 30.40f));
+            listWall.add(new WallEntity(world, wallTexture,56.8f, 31.20f));
 
         }
 
