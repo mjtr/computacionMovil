@@ -35,7 +35,7 @@ public class ImpulseWallEntity extends Actor {
         box.setAsBox(0.5f,0.5f);
 
         fixture = body.createFixture(box, 1);
-        fixture.setUserData("greenWall");
+        fixture.setUserData("impulseWall");
         box.dispose();
 
         setPosition((x - 0.5f) * Constans.PIXELS_IN_METER, y * Constans.PIXELS_IN_METER);

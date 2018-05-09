@@ -28,7 +28,7 @@ public class MyGdxGame extends Game {
 		manager.load("finish2.png", Texture.class);
 		manager.load("finish.png", Texture.class);
 		manager.load("ball.png", Texture.class);
-		manager.load("hole.png" ,Texture.class);
+		manager.load("holepeq.png" ,Texture.class);
 		manager.load("wallGreen.png",Texture.class);
 		manager.load("Magicball.png",Texture.class);
 		manager.load("orangeball.png",Texture.class);
@@ -41,10 +41,10 @@ public class MyGdxGame extends Game {
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
 
-		manager.finishLoading();
-		setScreen(new MenuScreen(this));
 		//manager.finishLoading();
-//		setScreen(new GameLevel3Screen(this));
+		//setScreen(new MenuScreen(this));
+		manager.finishLoading();
+ 		setScreen(new GameLevel2Screen(this));
 	}
 
 	public void finishLoading() {

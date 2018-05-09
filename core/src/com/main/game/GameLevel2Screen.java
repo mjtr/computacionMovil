@@ -4,6 +4,9 @@ package com.main.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
@@ -30,9 +33,9 @@ public class GameLevel2Screen extends BaseScreen {
     private FinishEntity finish;
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
 
-    private BlackHoleEntity hole;
+    private BlackHoleEntity hole, hole2;
 
-    private Texture playerTexture, finishTexture , wallTexture ,holeTexture;
+    private Texture playerTexture, finishTexture , wallTexture ,holeTexture, backgroundTexture;
 
 
     public GameLevel2Screen(MyGdxGame game) {
@@ -40,20 +43,31 @@ public class GameLevel2Screen extends BaseScreen {
 
         stage  = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0), true);
+
     }
 
     public void show() {
 
-        playerTexture = game.getManager().get("ball.png");
-        finishTexture = game.getManager().get("finish.png");
-        wallTexture = game.getManager().get("wallYellow.png");
-        holeTexture = game.getManager().get("hole.png");
+        backgroundTexture = game.getManager().get("background.png");
 
-        finish = new FinishEntity(world,finishTexture,new Vector2(3.0f,1.3f));
+
+
+
+        playerTexture = game.getManager().get("ball.png");
+        finishTexture = game.getManager().get("finish2.png");
+        wallTexture = game.getManager().get("wallYellow.png");
+        holeTexture = game.getManager().get("holepeq.png");
+
+
+
+
+        finish = new FinishEntity(world,finishTexture,new Vector2(3.0f,2.3f));
 
         player = new PlayerEntity(world,playerTexture, new Vector2(11.30f,13.2f));
 
         hole = new BlackHoleEntity(world,holeTexture, new Vector2(15,13));
+
+        hole2 = new BlackHoleEntity(world,holeTexture,new Vector2(18,8));
 
         world.setContactListener(new ContactListener() {
 
@@ -61,7 +75,7 @@ public class GameLevel2Screen extends BaseScreen {
                 if(areCollided(contact,"player" , "finish")){
                     stage.addAction(
                             Actions.sequence(
-                                    Actions.delay(1.5f),
+                                    Actions.delay(0.5f),
                                     Actions.run(new Runnable() {
 
                                         public void run() {
@@ -105,7 +119,85 @@ public class GameLevel2Screen extends BaseScreen {
         });
 
 
-//Para que esten juntos hay que ponerlos de 0.85 en 0.85 en las y
+
+        creacionEscenario();
+
+
+
+
+        //Añadimos todos los actores
+        stage.addActor(player);
+        stage.addActor(finish);
+        stage.addActor(hole);
+        stage.addActor(hole2);
+
+        for (WallEntity wall : listWall){
+            stage.addActor(wall);
+        }
+
+        //sprite.setScale(0.3f,0.3f);
+        //sprite.setPosition(hole.getX() , hole.getY() );
+    }
+
+    public void hide() {
+        player.detach();
+        player.remove();
+
+        finish.detach();
+        finish.remove();
+
+        hole.detach();
+        hole.remove();
+
+        hole2.detach();
+        hole.remove();
+
+        listWall.clear();
+    }
+
+    public void dispose() {
+        world.dispose();
+        stage.dispose();
+    }
+
+    public void render(float delta) {
+
+        Gdx.gl.glClearColor(0.5f,0.2f,0.5f,1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
+        stage.getBatch().begin();
+        stage.getBatch().draw(backgroundTexture,0, 0,640,360);
+        stage.getBatch().end();
+
+
+        stage.act();
+       // world.step(delta,8,3);
+        world.step(delta,6,2);
+
+        stage.draw();
+
+
+    }
+
+    private boolean areCollided(Contact contact, Object userA, Object userB){
+
+        Object userDataA  = contact.getFixtureA().getUserData();
+        Object userDataB  = contact.getFixtureB().getUserData();
+
+        if (userDataA == null || userDataB == null) {
+            System.out.println("No hemos podido coger ningún user data");
+            return false;
+        }
+
+        return (( userDataA.equals(userA) && userDataB.equals(userB))
+                || userDataA.equals(userB) && userDataB.equals(userA) );
+
+    }
+
+
+    private void creacionEscenario(){
+        //Para que esten juntos hay que ponerlos de 0.85 en 0.85 en las y
         //Muros verticales izquierdos
         listWall.add(new WallEntity(world, wallTexture,1,0));
         listWall.add(new WallEntity(world, wallTexture,1,0.85f));
@@ -286,70 +378,6 @@ public class GameLevel2Screen extends BaseScreen {
         listWall.add(new WallEntity(world, wallTexture,21.85f,  7.65f ));
         listWall.add(new WallEntity(world, wallTexture,21.85f,  8.5f  ));
         listWall.add(new WallEntity(world, wallTexture,21.85f,  9.35f ));
-
-
-        //Añadimos todos los actores
-        stage.addActor(player);
-        stage.addActor(finish);
-        stage.addActor(hole);
-
-        for (WallEntity wall : listWall){
-            stage.addActor(wall);
-        }
-
-
     }
-
-    public void hide() {
-        player.detach();
-        player.remove();
-
-        finish.detach();
-        finish.remove();
-
-        hole.detach();
-        hole.remove();
-
-        listWall.clear();
-    }
-
-    public void dispose() {
-        world.dispose();
-        stage.dispose();
-    }
-
-    public void render(float delta) {
-
-        Gdx.gl.glClearColor(0.5f,0.2f,0.5f,1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
-        //hole.act(delta);
-        hole.setRotation(45);
-        hole.rotateBy(90);
-        stage.act();
-        world.step(delta,8,3);
-        stage.draw();
-
-
-    }
-
-    private boolean areCollided(Contact contact, Object userA, Object userB){
-
-        Object userDataA  = contact.getFixtureA().getUserData();
-        Object userDataB  = contact.getFixtureB().getUserData();
-
-        if (userDataA == null || userDataB == null) {
-            System.out.println("No hemos podido coger ningún user data");
-            return false;
-        }
-
-        return (( userDataA.equals(userA) && userDataB.equals(userB))
-                || userDataA.equals(userB) && userDataB.equals(userA) );
-
-    }
-
-
-
 
 }

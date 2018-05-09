@@ -3,6 +3,7 @@ package com.main.game.entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -20,12 +21,17 @@ public class FinishEntity extends Actor {
     private Body body;
     private Fixture fixture;
 
+    private Sprite sprite;
+    private int i = 0;
+
     private boolean tocaFin = false;
 
     public FinishEntity(World world, Texture texture , Vector2 position){
 
         this.world = world;
         this.texture = texture;
+
+        sprite = new Sprite(texture);
 
         BodyDef def = new BodyDef();
         def.position.set(position);
@@ -41,6 +47,11 @@ public class FinishEntity extends Actor {
         setSize((PIXELS_IN_METER ), PIXELS_IN_METER);
         setPosition(position.x * PIXELS_IN_METER, position.y * PIXELS_IN_METER);
 
+
+        sprite.setPosition((body.getPosition().x -5f)* PIXELS_IN_METER , (body.getPosition().y -5f) * PIXELS_IN_METER);
+        sprite.setScale(0.1f,0.1f);
+
+
     }
 
     public boolean isTocaFin() {
@@ -54,11 +65,16 @@ public class FinishEntity extends Actor {
 
     public void act(float delta) {
 
+        sprite.setRotation(i+=2);
+        getStage().getBatch().begin();
+        sprite.draw(getStage().getBatch());
+        getStage().getBatch().end();
+
     }
 
     public void draw(Batch batch, float parentAlpha) {
         setPosition( (body.getPosition().x - 0.5f)* PIXELS_IN_METER , (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
-        batch.draw(texture,getX(),getY(), getWidth(),getHeight());
+       // batch.draw(texture,getX(),getY(), getWidth(),getHeight());
     }
 
     public void detach (){
