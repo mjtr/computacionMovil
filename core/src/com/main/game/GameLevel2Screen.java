@@ -323,9 +323,14 @@ public class GameLevel2Screen extends BaseScreen {
         Gdx.gl.glClearColor(0.5f,0.2f,0.5f,1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
+        //hole.act(delta);
+        hole.setRotation(45);
+        hole.rotateBy(90);
         stage.act();
-        world.step(delta,6,2);
+        world.step(delta,8,3);
         stage.draw();
+
 
     }
 

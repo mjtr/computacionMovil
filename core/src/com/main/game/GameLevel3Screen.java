@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.FinishEntity;
-import com.main.game.entities.GreenWallEntity;
+import com.main.game.entities.ImpulseWallEntity;
 import com.main.game.entities.PlayerEntity;
 import com.main.game.entities.WallEntity;
 
@@ -33,7 +33,7 @@ public class GameLevel3Screen extends BaseScreen{
     private PlayerEntity player;
     private FinishEntity finish;
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
-    private List<GreenWallEntity> specialWall = new ArrayList<GreenWallEntity>();
+    private List<ImpulseWallEntity> specialWall = new ArrayList<ImpulseWallEntity>();
     private BlackHoleEntity hole;
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, greenWallTexture;
@@ -137,7 +137,7 @@ public class GameLevel3Screen extends BaseScreen{
         }
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
-        /*for(GreenWallEntity wall : specialWall){
+        /*for(ImpulseWallEntity wall : specialWall){
             stage.addActor(wall);
         }*/
 
