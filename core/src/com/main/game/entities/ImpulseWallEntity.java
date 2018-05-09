@@ -11,7 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.main.game.Constans;
 
-public class GreenWallEntity extends Actor {
+public class ImpulseWallEntity extends Actor {
 
 
     private Texture texture;
@@ -22,7 +22,7 @@ public class GreenWallEntity extends Actor {
 
     private Fixture fixture;
 
-    public GreenWallEntity(World world, Texture texture, float x, float y) {
+    public ImpulseWallEntity(World world, Texture texture, float x, float y) {
 
         this.world = world;
         this.texture = texture;

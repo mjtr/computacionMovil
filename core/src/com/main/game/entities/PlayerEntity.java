@@ -21,17 +21,19 @@ public class PlayerEntity extends Actor {
 
     private float acelX, acelY ,speedx, zAngle , speedy;
 
-    private boolean hayAcel = true;
+    //private boolean hayAcel = true;
 
     private Texture texture;
 
     private World world;
+
 
     private Body body;
 
     private Fixture fixture;
 
     private boolean isAlive = true;
+
 
     public boolean isAlive() {
         return isAlive;
@@ -47,16 +49,20 @@ public class PlayerEntity extends Actor {
 
         this.world = world;
         this.texture = texture;
-        hayAcel = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
+        //hayAcel = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 
         BodyDef def = new BodyDef();
+
         def.position.set(position);
         def.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(def);
 
+
         CircleShape box = new CircleShape();
         box.setRadius(0.5f);
+
         fixture = body.createFixture(box, 3);
+
         fixture.setUserData("player");
         box.dispose();
 
@@ -88,6 +94,7 @@ public class PlayerEntity extends Actor {
 
             body.setLinearVelocity(acelX * 0.02f, acelY * 0.02f);
             //body.setLinearVelocity(acelX * delta +1, acelY * delta + 1);
+
 
             // body.setLinearVelocity(acelX * 0.02f ,acelY * 0.02f - (speedy*0.01f));
         }

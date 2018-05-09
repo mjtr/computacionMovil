@@ -19,6 +19,7 @@ public class FinishEntity extends Actor {
     private World world;
     private Body body;
     private Fixture fixture;
+
     private boolean tocaFin = false;
 
     public FinishEntity(World world, Texture texture , Vector2 position){

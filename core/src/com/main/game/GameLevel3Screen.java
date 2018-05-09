@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.FinishEntity;
-import com.main.game.entities.GreenWallEntity;
+import com.main.game.entities.ImpulseWallEntity;
 import com.main.game.entities.PlayerEntity;
 import com.main.game.entities.WallEntity;
 
@@ -33,10 +33,10 @@ public class GameLevel3Screen extends BaseScreen{
     private PlayerEntity player;
     private FinishEntity finish;
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
-    private List<GreenWallEntity> specialWall = new ArrayList<GreenWallEntity>();
+    private List<ImpulseWallEntity> specialWall = new ArrayList<ImpulseWallEntity>();
     private BlackHoleEntity hole;
 
-    private Texture playerTexture, finishTexture , wallTexture ,holeTexture, greenWallTexture;
+    private Texture playerTexture, finishTexture , wallTexture ,holeTexture;
 
     private Texture background;
 
@@ -49,6 +49,7 @@ public class GameLevel3Screen extends BaseScreen{
         super(game);
         stage  = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0), true);
+
         position = new Vector3(stage.getCamera().position);
 
     }
@@ -60,11 +61,14 @@ public class GameLevel3Screen extends BaseScreen{
         finishTexture = game.getManager().get("finish2.png");
         wallTexture = game.getManager().get("wallYellow.png");
         holeTexture = game.getManager().get("hole.png");
-        greenWallTexture = game.getManager().get("whitewall.png");
+        //greenWallTexture = game.getManager().get("whitewall.png");
         background = game.getManager().get("background.png");
 
        // camera = new OrthographicCamera();
         //camera.setToOrtho(true, 1280, 1240);
+
+
+
 
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
@@ -75,14 +79,17 @@ public class GameLevel3Screen extends BaseScreen{
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
+
+
                 if(areCollided(contact,"player" , "finish")){
+
                     stage.addAction(
                             Actions.sequence(
                                     Actions.delay(1.5f),
                                     Actions.run(new Runnable() {
 
                                         public void run() {
-                                            game.setScreen(game.gameOverScreen);
+                                            game.setScreen(game.endLevelScreen);
                                         }
                                     })
                             )
@@ -91,6 +98,7 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact,"player","hole")){
+
                     player.setAlive(false);
 
                     stage.addAction(
@@ -137,7 +145,8 @@ public class GameLevel3Screen extends BaseScreen{
         }
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
-        /*for(GreenWallEntity wall : specialWall){
+
+        /*for(ImpulseWallEntity wall : specialWall){
             stage.addActor(wall);
         }*/
 
@@ -147,6 +156,7 @@ public class GameLevel3Screen extends BaseScreen{
     }
 
     public void hide() {
+
         player.detach();
         player.remove();
 
