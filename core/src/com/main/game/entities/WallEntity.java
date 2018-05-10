@@ -42,7 +42,6 @@ public class WallEntity extends Actor{
         setSize(Constans.PIXELS_IN_METER, Constans.PIXELS_IN_METER);
     }
 
-    @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }

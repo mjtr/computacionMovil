@@ -35,16 +35,20 @@ public class MyGdxGame extends Game {
 		manager.load("whitewall.png",Texture.class);
 		manager.load("wallblue.png",Texture.class);
 		manager.load("background.png",Texture.class);
+		manager.load("background2.png",Texture.class);
+		manager.load("background3.jpg",Texture.class);
+		manager.load("background4.png",Texture.class);
+		manager.load("water.jpg",Texture.class);
 
 
 
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
 
-		//manager.finishLoading();
-		//setScreen(new MenuScreen(this));
+		//loadingScreen = new LoadingScreen(this);
+		//setScreen(loadingScreen);
+
+
 		manager.finishLoading();
- 		setScreen(new GameLevel2Screen(this));
+ 		setScreen(new GameLevel3Screen(this));
 	}
 
 	public void finishLoading() {

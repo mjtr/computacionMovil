@@ -48,9 +48,16 @@ public class FinishEntity extends Actor {
         setPosition(position.x * PIXELS_IN_METER, position.y * PIXELS_IN_METER);
 
 
-        sprite.setPosition((body.getPosition().x -5f)* PIXELS_IN_METER , (body.getPosition().y -5f) * PIXELS_IN_METER);
-        sprite.setScale(0.1f,0.1f);
+        if(PIXELS_IN_METER == 10f){
 
+            sprite.setPosition((body.getPosition().x - 12f) * PIXELS_IN_METER, (body.getPosition().y - 11f) * PIXELS_IN_METER);
+            sprite.setScale(0.06f, 0.06f);
+
+        }else {
+
+            sprite.setPosition((body.getPosition().x - 5f) * PIXELS_IN_METER, (body.getPosition().y - 5f) * PIXELS_IN_METER);
+            sprite.setScale(0.1f, 0.1f);
+        }
 
     }
 
@@ -63,6 +70,11 @@ public class FinishEntity extends Actor {
     }
 
 
+    public void draw(Batch batch, float parentAlpha) {
+        setPosition( (body.getPosition().x - 0.5f)* PIXELS_IN_METER , (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
+        // batch.draw(texture,getX(),getY(), getWidth(),getHeight());
+    }
+
     public void act(float delta) {
 
         sprite.setRotation(i+=2);
@@ -72,10 +84,7 @@ public class FinishEntity extends Actor {
 
     }
 
-    public void draw(Batch batch, float parentAlpha) {
-        setPosition( (body.getPosition().x - 0.5f)* PIXELS_IN_METER , (body.getPosition().y - 0.5f) * PIXELS_IN_METER);
-       // batch.draw(texture,getX(),getY(), getWidth(),getHeight());
-    }
+
 
     public void detach (){
         //Método que se encargará de destruir lo elementos que no usemos

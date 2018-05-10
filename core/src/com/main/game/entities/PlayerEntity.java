@@ -23,6 +23,8 @@ public class PlayerEntity extends Actor {
 
     //private boolean hayAcel = true;
 
+    float characterX,characterY;
+
     private Texture texture;
 
     private World world;
@@ -35,13 +37,10 @@ public class PlayerEntity extends Actor {
     private boolean isAlive = true;
 
 
-    public boolean isAlive() {
-        return isAlive;
-    }
+    private boolean choqueMuroImpulso = false;
 
-    public void setAlive(boolean alive) {
-        isAlive = alive;
-    }
+
+
 
 
     public PlayerEntity(World world, Texture texture, Vector2 position) {
@@ -79,24 +78,36 @@ public class PlayerEntity extends Actor {
 
 
     public void act(float delta) {
-        //Orientation orientation = Gdx.input.getNativeOrientation();
 
         if(isAlive()) {
-            //float orientacion =  Gdx.input.getAzimuth();
 
             acelX += Gdx.input.getAccelerometerY();
             acelY -= Gdx.input.getAccelerometerX();
 
-            //zAngle = Gdx.input.getAzimuth();
+            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
+                 characterX -= Gdx.graphics.getDeltaTime() * 5;
+            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT))
+                characterX += Gdx.graphics.getDeltaTime() * 5;
+            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP))
+                characterY += Gdx.graphics.getDeltaTime() * 5;
+            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN))
+                characterY -= Gdx.graphics.getDeltaTime() * 5;
 
-            // speedx = Gdx.input.getPitch();
-            //speedy = Gdx.input.getPitch();
 
-            body.setLinearVelocity(acelX * 0.02f, acelY * 0.02f);
-            //body.setLinearVelocity(acelX * delta +1, acelY * delta + 1);
+            body.setLinearVelocity(characterX,characterY);
 
+            if(choqueMuroImpulso == true){
 
-            // body.setLinearVelocity(acelX * 0.02f ,acelY * 0.02f - (speedy*0.01f));
+               // body.applyForceToCenter( -(acelX * 10) , - (acelY * 10),true );
+                // body.applyLinearImpulse(-(acelX + 20), - (acelY  - 20 ) , body.getPosition().x,body.getPosition().y,true);
+                choqueMuroImpulso = false;
+            }
+
+            /*else {
+
+                body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+            }*/
+
         }
 
         }
@@ -110,6 +121,24 @@ public class PlayerEntity extends Actor {
 
 
 
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
+
+
+
+
+    public boolean isChoqueMuroImpulso() {
+        return choqueMuroImpulso;
+    }
+
+    public void setChoqueMuroImpulso(boolean choqueMuroImpulso) {
+        this.choqueMuroImpulso = choqueMuroImpulso;
+    }
 
 
 }

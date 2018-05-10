@@ -11,7 +11,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.main.game.Constans;
 
-public class ImpulseWallEntity extends Actor {
+public class PassWallEntity extends Actor{
+
 
 
     private Texture texture;
@@ -23,7 +24,9 @@ public class ImpulseWallEntity extends Actor {
     private Fixture fixture;
 
 
-    public ImpulseWallEntity(World world, Texture texture, float x, float y) {
+    private boolean destroyWall = false;
+
+    public PassWallEntity(World world, Texture texture, float x, float y) {
 
         this.world = world;
         this.texture = texture;
@@ -36,15 +39,26 @@ public class ImpulseWallEntity extends Actor {
         box.setAsBox(0.5f,0.5f);
 
         fixture = body.createFixture(box, 1);
-        fixture.setUserData("impulseWall");
+        fixture.setUserData("destroyWall");
         box.dispose();
 
         setPosition((x - 0.5f) * Constans.PIXELS_IN_METER, y * Constans.PIXELS_IN_METER);
         setSize(Constans.PIXELS_IN_METER, Constans.PIXELS_IN_METER);
     }
 
+
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+    }
+
+
+    public void act(float delta) {
+
+        if(destroyWall == true){
+            body.setActive(false);
+
+        }
+
     }
 
     public void detach() {
@@ -52,7 +66,13 @@ public class ImpulseWallEntity extends Actor {
         world.destroyBody(body);
     }
 
+    public boolean isDestroyWall() {
+        return destroyWall;
+    }
 
+    public void setDestroyWall(boolean destroyWall) {
+        this.destroyWall = destroyWall;
+    }
 
 
 

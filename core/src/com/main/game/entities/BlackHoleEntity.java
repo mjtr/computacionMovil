@@ -48,8 +48,19 @@ public class BlackHoleEntity extends Actor {
         setSize((PIXELS_IN_METER ) * 2, PIXELS_IN_METER * 2);
         setPosition(position.x * PIXELS_IN_METER, position.y * PIXELS_IN_METER);
 
-        sprite.setPosition((body.getPosition().x -5.2f)* PIXELS_IN_METER , (body.getPosition().y -3.25f) * PIXELS_IN_METER);
-        sprite.setScale(0.25f,0.25f);
+
+
+        if(PIXELS_IN_METER == 10f){
+
+            sprite.setPosition((body.getPosition().x -12.2f)* PIXELS_IN_METER , (body.getPosition().y -8.25f) * PIXELS_IN_METER);
+            sprite.setScale(0.15f,0.15f);
+
+        }else{
+
+            sprite.setPosition((body.getPosition().x -5.2f)* PIXELS_IN_METER , (body.getPosition().y -3.25f) * PIXELS_IN_METER);
+            sprite.setScale(0.25f,0.25f);
+
+        }
 
 
     }

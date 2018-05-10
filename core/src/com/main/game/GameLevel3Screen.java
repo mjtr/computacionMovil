@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -17,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
+import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
 import com.main.game.entities.PlayerEntity;
@@ -30,19 +30,32 @@ public class GameLevel3Screen extends BaseScreen{
     private Stage stage;
     private World world;
     private OrthographicCamera camera;
+    private Vector3 position;
+
+    private boolean deathWall = false;
 
 
     private PlayerEntity player;
+
     private FinishEntity finish;
+
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
+
     private List<ImpulseWallEntity> specialWall = new ArrayList<ImpulseWallEntity>();
-    private BlackHoleEntity hole;
 
-    private Texture playerTexture, finishTexture , wallTexture ,holeTexture;
 
+    private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
+
+    private ImpulseWallEntity impulseWall1 , impulseWall2;
+
+
+    private PassWallEntity destroyWall1,destroyWall2,destroyWall3;
+
+
+    private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture;
     private Texture background;
 
-    private Vector3 position;
+
 
 
 
@@ -62,11 +75,13 @@ public class GameLevel3Screen extends BaseScreen{
         playerTexture = game.getManager().get("Magicball.png");
         finishTexture = game.getManager().get("finish2.png");
         wallTexture = game.getManager().get("wallYellow.png");
-        holeTexture = game.getManager().get("hole.png");
+        holeTexture = game.getManager().get("holepeq.png");
+        impulseWallTexture = game.getManager().get("wallblue.png");
+        destroyWallTexture = game.getManager().get("whiteWall.png");
         //greenWallTexture = game.getManager().get("whitewall.png");
         background = game.getManager().get("background.png");
 
-       // camera = new OrthographicCamera();
+       // camera = new OrthographicCamera(1280f,1240f);
         //camera.setToOrtho(true, 1280, 1240);
 
 
@@ -75,6 +90,13 @@ public class GameLevel3Screen extends BaseScreen{
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
         player = new PlayerEntity(world,playerTexture, new Vector2(50.30f,33.3f));
+
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(8,17)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,15)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,26)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(41,5)));
+
+
 
         //hole = new BlackHoleEntity(world,holeTexture, new Vector2(15,13));
 
@@ -116,6 +138,23 @@ public class GameLevel3Screen extends BaseScreen{
                     );
                 }
 
+
+                if(areCollided(contact, "player", "impulseWall")){
+                    player.setChoqueMuroImpulso(true);
+
+                }
+
+                if(areCollided(contact, "player", "destroyWall")){
+                        destroyWall1.setDestroyWall(true);
+                        destroyWall2.setDestroyWall(true);
+                        destroyWall3.setDestroyWall(true);
+
+                }
+
+                if(areCollided(contact, "player", "wall")){
+
+                }
+
             }
 
             public void endContact(Contact contact) {
@@ -141,16 +180,25 @@ public class GameLevel3Screen extends BaseScreen{
         stage.addActor(player);
         stage.addActor(finish);
         //stage.addActor(hole);
+        stage.addActor(impulseWall1);
+        stage.addActor(impulseWall2);
+
+
+        stage.addActor(destroyWall1);
+        stage.addActor(destroyWall2);
+        stage.addActor(destroyWall3);
+
 
         for (WallEntity wall : listWall){
             stage.addActor(wall);
         }
 
-        System.out.println("Número de muros totales hasta ahora: " + listWall.size());
+        for (BlackHoleEntity hole : listHole){
+            stage.addActor(hole);
+        }
 
-        /*for(ImpulseWallEntity wall : specialWall){
-            stage.addActor(wall);
-        }*/
+
+        System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
 
         //stage.getCamera().position.set(position);
@@ -165,11 +213,28 @@ public class GameLevel3Screen extends BaseScreen{
         finish.detach();
         finish.remove();
 
+        impulseWall1.detach();
+        impulseWall1.remove();
+
+        impulseWall2.detach();
+        impulseWall2.remove();
+
+        destroyWall1.detach();
+        destroyWall1.remove();
+
+
+        destroyWall2.detach();
+        destroyWall2.remove();
+
+        destroyWall3.detach();
+        destroyWall3.remove();
+
         //hole.detach();
         //hole.remove();
 
         listWall.clear();
-     //   specialWall.clear();
+        listHole.clear();
+
     }
 
     public void dispose() {
@@ -191,12 +256,11 @@ public class GameLevel3Screen extends BaseScreen{
         //stage.getBatch().draw(background,0, 0,640,360);
         //stage.getBatch().end();
 
-
         stage.draw();
 
 
         //stage.getCamera().position.set(player.getX(),player.getY(),0);
-       // stage.getCamera().update();
+        //stage.getCamera().update();
 
     }
 
@@ -533,8 +597,14 @@ public class GameLevel3Screen extends BaseScreen{
 
             listWall.add(new WallEntity(world, wallTexture,54.10f, 31.20f));
             listWall.add(new WallEntity(world, wallTexture,54.10f, 32.00f));
-            listWall.add(new WallEntity(world, wallTexture,54.10f, 32.80f));
-            listWall.add(new WallEntity(world, wallTexture,54.10f, 33.60f));
+
+
+            //listWall.add(new WallEntity(world, wallTexture,54.10f, 32.80f));
+            //listWall.add(new WallEntity(world, wallTexture,54.10f, 33.60f));
+            impulseWall1 = new ImpulseWallEntity(world,impulseWallTexture,54.10f,32.80f);
+            impulseWall2 = new ImpulseWallEntity(world,impulseWallTexture,54.10f,33.60f);
+
+
             listWall.add(new WallEntity(world, wallTexture,54.10f, 34.40f));
 
             listWall.add(new WallEntity(world, wallTexture,8.20f,31.20f));
@@ -854,11 +924,15 @@ public class GameLevel3Screen extends BaseScreen{
 
             listWall.add(new WallEntity(world, wallTexture,16.3f,25.60f));
             listWall.add(new WallEntity(world, wallTexture,15.4f,25.60f));
-            listWall.add(new WallEntity(world, wallTexture,14.5f,25.60f));
-            //Este es el que hay que hacerlo destructible
-            listWall.add(new WallEntity(world, wallTexture,13.6f,25.60f));
-            //
-            listWall.add(new WallEntity(world, wallTexture,12.7f,25.60f));
+
+            //listWall.add(new WallEntity(world, wallTexture,14.5f,25.60f));
+            //listWall.add(new WallEntity(world, wallTexture,13.6f,25.60f));
+            //listWall.add(new WallEntity(world, wallTexture,12.7f,25.60f));
+            destroyWall1 = new PassWallEntity(world, destroyWallTexture,14.5f,25.60f);
+            destroyWall2 = new PassWallEntity(world, destroyWallTexture,13.6f,25.60f);
+            destroyWall3 =  new PassWallEntity(world, destroyWallTexture,12.7f,25.60f);
+
+
             listWall.add(new WallEntity(world, wallTexture,11.8f,25.60f));
             listWall.add(new WallEntity(world, wallTexture,10.9f,25.60f));
 

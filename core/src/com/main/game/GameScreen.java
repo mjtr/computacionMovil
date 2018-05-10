@@ -32,9 +32,7 @@ public class GameScreen extends BaseScreen {
 
     private FinishEntity fin;
 
-    private Texture playerTexture, wallTexture , finishTexture;
-
-    private boolean collision = false;
+    private Texture playerTexture, wallTexture , finishTexture, backgroundTexture;
 
 
 
@@ -49,7 +47,8 @@ public class GameScreen extends BaseScreen {
 
         playerTexture = game.getManager().get("ball.png");
         wallTexture = game.getManager().get("wallRedPeq.png");
-        finishTexture = game.getManager().get("finish.png");
+        finishTexture = game.getManager().get("finish2.png");
+        backgroundTexture = game.getManager().get("background4.png");
 
 
 
@@ -65,7 +64,7 @@ public class GameScreen extends BaseScreen {
                         Actions.sequence(
                                 Actions.delay(1.5f),
                                 Actions.run(new Runnable() {
-                                    @Override
+
                                     public void run() {
                                         game.setScreen(game.endLevelScreen);
                                     }
@@ -103,8 +102,72 @@ public class GameScreen extends BaseScreen {
             }
         });
 
+        creacionEscenario();
 
-//Para que esten juntos hay que ponerlos de 0.85 en 0.85 en las y
+        //Añadimos todos los actores
+        stage.addActor(player);
+        stage.addActor(fin);
+
+        for (WallEntity wall : listWall){
+            stage.addActor(wall);
+        }
+
+
+    }
+
+    public void hide() {
+        player.detach();
+        player.remove();
+
+        for (WallEntity wall : listWall){
+            wall.detach();
+            wall.remove();
+        }
+        fin.detach();
+        fin.remove();
+    }
+
+    public void render(float delta) {
+
+        Gdx.gl.glClearColor(0.8f,0.5f,0.5f,1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        stage.getBatch().begin();
+        stage.getBatch().draw(backgroundTexture,0, 0,640,360);
+        stage.getBatch().end();
+
+        stage.act();
+        world.step(delta,6,2);
+        stage.draw();
+
+    }
+
+
+
+    public void dispose() {
+        stage.dispose();
+        world.dispose();
+    }
+
+    private boolean areCollided(Contact contact, Object userA, Object userB){
+
+        Object userDataA  = contact.getFixtureA().getUserData();
+        Object userDataB  = contact.getFixtureB().getUserData();
+
+        if (userDataA == null || userDataB == null) {
+            System.out.println("No hemos podido coger ningún user data");
+            return false;
+        }
+
+        return (( userDataA.equals(userA) && userDataB.equals(userB))
+                || userDataA.equals(userB) && userDataB.equals(userA) );
+
+    }
+
+
+    private void creacionEscenario(){
+
+        //Para que esten juntos hay que ponerlos de 0.85 en 0.85 en las y
         //Muros verticales izquierdos
         listWall.add(new WallEntity(world, wallTexture,1,0));
         listWall.add(new WallEntity(world, wallTexture,1,0.85f));
@@ -208,7 +271,7 @@ public class GameScreen extends BaseScreen {
         listWall.add(new WallEntity(world, wallTexture,27.55f,14.45f));
 
 
-       //Creación de muros dentro para hacer un laberinto
+        //Creación de muros dentro para hacer un laberinto
 
 
         //Primer pilar de la izq
@@ -275,7 +338,7 @@ public class GameScreen extends BaseScreen {
         listWall.add(new WallEntity(world, wallTexture,13.30f,12.75f));
         listWall.add(new WallEntity(world, wallTexture,13.30f,13.60f));
 
-       //pilar del final de la recta
+        //pilar del final de la recta
 
 
         listWall.add(new WallEntity(world, wallTexture,21.85f,  4.25f ));
@@ -288,64 +351,8 @@ public class GameScreen extends BaseScreen {
 
 
 
-
-
-
-        //Añadimos todos los actores
-        stage.addActor(player);
-        stage.addActor(fin);
-
-        for (WallEntity wall : listWall){
-            stage.addActor(wall);
-        }
-
-
     }
 
-    public void hide() {
-        player.detach();
-        player.remove();
-
-        for (WallEntity wall : listWall){
-            wall.detach();
-            wall.remove();
-        }
-        fin.detach();
-        fin.remove();
-    }
-
-    public void render(float delta) {
-
-        Gdx.gl.glClearColor(0.8f,0.5f,0.5f,1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        stage.act();
-        world.step(delta,6,2);
-        stage.draw();
-
-    }
-
-
-
-    public void dispose() {
-        stage.dispose();
-        world.dispose();
-    }
-
-    private boolean areCollided(Contact contact, Object userA, Object userB){
-
-        Object userDataA  = contact.getFixtureA().getUserData();
-        Object userDataB  = contact.getFixtureB().getUserData();
-
-        if (userDataA == null || userDataB == null) {
-            System.out.println("No hemos podido coger ningún user data");
-            return false;
-        }
-
-        return (( userDataA.equals(userA) && userDataB.equals(userB))
-                || userDataA.equals(userB) && userDataB.equals(userA) );
-
-    }
 
 
 }
