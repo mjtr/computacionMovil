@@ -10,7 +10,7 @@ public class MyGdxGame extends Game {
 
 	private AssetManager manager;
 
-	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen, gameLevel2Screen, gameOverScreen
+	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
 			,gameLevel3Screen;
 
 
@@ -39,16 +39,25 @@ public class MyGdxGame extends Game {
 		manager.load("background3.jpg",Texture.class);
 		manager.load("background4.png",Texture.class);
 		manager.load("water.jpg",Texture.class);
+		manager.load("spike.png",Texture.class);
+		manager.load("spikeRigh.png",Texture.class);
+		manager.load("conjuntoespinas.png",Texture.class);
+		manager.load("Espina.png",Texture.class);
+		manager.load("spikeLeft.png",Texture.class);
 
 
 
 
-		//loadingScreen = new LoadingScreen(this);
-		//setScreen(loadingScreen);
 
 
-		manager.finishLoading();
- 		setScreen(new GameLevel3Screen(this));
+		loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
+
+
+//		manager.finishLoading();
+
+
+ //		setScreen(new GameLevel3Screen(this));
 	}
 
 	public void finishLoading() {
@@ -58,6 +67,7 @@ public class MyGdxGame extends Game {
 		gameLevel2Screen = new GameLevel2Screen(this);
 		gameOverScreen = new GameOverScreen(this);
 		gameLevel3Screen = new GameLevel3Screen(this);
+		endLevel2Screen = new EndLevel2Screen(this);
 		setScreen(menuScreen);
 	}
 

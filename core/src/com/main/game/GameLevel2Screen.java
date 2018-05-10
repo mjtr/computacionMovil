@@ -79,7 +79,7 @@ public class GameLevel2Screen extends BaseScreen {
                                     Actions.run(new Runnable() {
 
                                         public void run() {
-                                            game.setScreen(game.gameOverScreen);
+                                            game.setScreen(game.endLevel2Screen);
                                         }
                                     })
                             )

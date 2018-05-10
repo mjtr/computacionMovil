@@ -20,6 +20,7 @@ import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
 import com.main.game.entities.PlayerEntity;
+import com.main.game.entities.SpikeEntity;
 import com.main.game.entities.WallEntity;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
 
-    private List<ImpulseWallEntity> specialWall = new ArrayList<ImpulseWallEntity>();
+    private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
 
 
     private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
@@ -49,13 +50,12 @@ public class GameLevel3Screen extends BaseScreen{
     private ImpulseWallEntity impulseWall1 , impulseWall2;
 
 
-    private PassWallEntity destroyWall1,destroyWall2,destroyWall3;
+    private PassWallEntity passWall1, passWall2, passWall3,passWall4,passWall5,passWall6,passWall7,passWall8,passWall9;
+    private List<PassWallEntity> listPassWall = new ArrayList<PassWallEntity>();
 
 
-    private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture;
-    private Texture background;
-
-
+    private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
+            spikeTexture , spikeRighTexture,spikeLeftTexture ,background;
 
 
 
@@ -77,12 +77,14 @@ public class GameLevel3Screen extends BaseScreen{
         wallTexture = game.getManager().get("wallYellow.png");
         holeTexture = game.getManager().get("holepeq.png");
         impulseWallTexture = game.getManager().get("wallblue.png");
-        destroyWallTexture = game.getManager().get("whiteWall.png");
-        //greenWallTexture = game.getManager().get("whitewall.png");
-        background = game.getManager().get("background.png");
+        destroyWallTexture = game.getManager().get("whitewall.png");
+        background = game.getManager().get("water.jpg");
+        spikeTexture = game.getManager().get("spike.png");
+        spikeRighTexture = game.getManager().get("spikeRigh.png");
+        spikeLeftTexture = game.getManager().get("spikeLeft.png");
 
-       // camera = new OrthographicCamera(1280f,1240f);
-        //camera.setToOrtho(true, 1280, 1240);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, 1280, 1240);
 
 
 
@@ -95,10 +97,8 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,15)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,26)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(41,5)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(2,2)));
 
-
-
-        //hole = new BlackHoleEntity(world,holeTexture, new Vector2(15,13));
 
         world.setContactListener(new ContactListener() {
 
@@ -145,14 +145,21 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact, "player", "destroyWall")){
-                        destroyWall1.setDestroyWall(true);
-                        destroyWall2.setDestroyWall(true);
-                        destroyWall3.setDestroyWall(true);
+                        passWall1.setDestroyWall(true);
+                        passWall2.setDestroyWall(true);
+                        passWall3.setDestroyWall(true);
+                        passWall4.setDestroyWall(true);
+                        passWall5.setDestroyWall(true);
+                        passWall6.setDestroyWall(true);
+                        passWall7.setDestroyWall(true);
+                        passWall8.setDestroyWall(true);
+                        passWall9.setDestroyWall(true);
+
 
                 }
 
                 if(areCollided(contact, "player", "wall")){
-
+                    player.setChoqueMuro(true);
                 }
 
             }
@@ -173,20 +180,27 @@ public class GameLevel3Screen extends BaseScreen{
 
         creacionEscenario();
 
-
+        creacionEspinas();
 
 
         //Añadimos todos los actores
         stage.addActor(player);
         stage.addActor(finish);
-        //stage.addActor(hole);
+
+
         stage.addActor(impulseWall1);
         stage.addActor(impulseWall2);
 
 
-        stage.addActor(destroyWall1);
-        stage.addActor(destroyWall2);
-        stage.addActor(destroyWall3);
+        for(SpikeEntity spike : listSpikes){
+            stage.addActor(spike);
+        }
+
+
+        for(PassWallEntity pass : listPassWall){
+            stage.addActor(pass);
+
+        }
 
 
         for (WallEntity wall : listWall){
@@ -200,7 +214,7 @@ public class GameLevel3Screen extends BaseScreen{
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
-
+       // stage.getCamera().position.set(player.getX(),player.getY(),0);
         //stage.getCamera().position.set(position);
         //stage.getCamera().update();
     }
@@ -213,24 +227,7 @@ public class GameLevel3Screen extends BaseScreen{
         finish.detach();
         finish.remove();
 
-        impulseWall1.detach();
-        impulseWall1.remove();
-
-        impulseWall2.detach();
-        impulseWall2.remove();
-
-        destroyWall1.detach();
-        destroyWall1.remove();
-
-
-        destroyWall2.detach();
-        destroyWall2.remove();
-
-        destroyWall3.detach();
-        destroyWall3.remove();
-
-        //hole.detach();
-        //hole.remove();
+        listPassWall.clear();
 
         listWall.clear();
         listHole.clear();
@@ -244,23 +241,27 @@ public class GameLevel3Screen extends BaseScreen{
 
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(0.2f,0.2f,0.1f,1f);
-       // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClearColor(0.2f,0.2f,0.1f,1f);
+        Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
+
+        // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        /*
+        stage.getBatch().begin();
+        stage.getBatch().draw(background,Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        stage.getBatch().end();
+*/
 
         stage.act();
         world.step(delta,6,2);
 
-        //stage.getBatch().begin();
-        //stage.getBatch().draw(background,0, 0,640,360);
-        //stage.getBatch().end();
 
         stage.draw();
 
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().update();
 
     }
 
@@ -278,6 +279,126 @@ public class GameLevel3Screen extends BaseScreen{
                 || userDataA.equals(userB) && userDataB.equals(userA) );
 
     }
+
+
+    private void creacionEspinas(){
+
+        //Spikes del décimo cuadrante
+        listSpikes.add(new SpikeEntity(world, spikeTexture,27.1f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,28.0f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,28.9f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,29.8f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,30.7f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,31.6f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,32.5f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,33.4f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,34.3f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,35.2f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,36.1f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,37.0f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,37.9f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,38.8f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,39.7f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,40.6f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,41.5f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,42.4f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,43.3f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,44.2f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,45.1f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,46.0f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,46.9f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,47.8f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,48.7f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,49.6f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,50.5f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,51.4f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeTexture,52.3f,13.60f));
+
+
+        //spikes del cuadrante final
+
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 3.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 4.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 4.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 5.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 6.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 7.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 8.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 8.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 9.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,10.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,11.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,12.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,12.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,14.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,15.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,16.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,16.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,17.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,18.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,19.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,20.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,20.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,21.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,22.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,23.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,24.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,24.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,25.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,26.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,27.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,28.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,28.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f,29.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 30.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 31.20f));
+
+
+
+        //spikes perímetro muro derecho
+
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 0.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 0.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 1.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 2.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 3.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 4.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 4.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 5.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 6.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 7.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 8.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 8.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f, 9.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,10.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,11.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,12.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,12.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,13.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,14.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,15.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,16.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,16.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,17.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,18.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,19.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,20.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,20.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,21.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,22.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,23.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,24.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,24.80f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,25.60f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,26.40f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,27.20f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,28.00f));
+        listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,28.80f));
+
+
+    }
+
 
 
     private void creacionEscenario(){
@@ -811,9 +932,19 @@ public class GameLevel3Screen extends BaseScreen{
 
         private void sextoCuadrante(){
 
-            listWall.add(new WallEntity(world, wallTexture,1.90f,10.40f));
+            /*listWall.add(new WallEntity(world, wallTexture,1.90f,10.40f));
             listWall.add(new WallEntity(world, wallTexture,2.80f,10.40f));
             listWall.add(new WallEntity(world, wallTexture,3.70f,10.40f));
+            */
+
+
+            listPassWall.add(passWall4 = new PassWallEntity(world, destroyWallTexture,1.90f,10.40f));
+            listPassWall.add(passWall5 = new PassWallEntity(world, destroyWallTexture,2.80f,10.40f));
+            listPassWall.add(passWall6 = new PassWallEntity(world, destroyWallTexture,3.70f,10.40f));
+
+
+
+
             listWall.add(new WallEntity(world, wallTexture,4.60f,10.40f));
             listWall.add(new WallEntity(world, wallTexture,5.50f,10.40f));
             listWall.add(new WallEntity(world, wallTexture,6.40f,10.40f));
@@ -864,9 +995,16 @@ public class GameLevel3Screen extends BaseScreen{
             listWall.add(new WallEntity(world, wallTexture,46.0f,10.40f));
 
 
-            listWall.add(new WallEntity(world, wallTexture,1.90f,8.80f));
+           /* listWall.add(new WallEntity(world, wallTexture,1.90f,8.80f));
             listWall.add(new WallEntity(world, wallTexture,2.80f,8.80f));
             listWall.add(new WallEntity(world, wallTexture,3.70f,8.80f));
+           */
+
+            listPassWall.add(passWall7 = new PassWallEntity(world, destroyWallTexture,1.90f,8.80f));
+            listPassWall.add(passWall8 = new PassWallEntity(world, destroyWallTexture,2.80f,8.80f));
+            listPassWall.add(passWall9 = new PassWallEntity(world, destroyWallTexture,3.70f,8.80f));
+
+
             listWall.add(new WallEntity(world, wallTexture,4.60f,8.80f));
             listWall.add(new WallEntity(world, wallTexture,5.50f,8.80f));
             listWall.add(new WallEntity(world, wallTexture,6.40f,8.80f));
@@ -928,9 +1066,9 @@ public class GameLevel3Screen extends BaseScreen{
             //listWall.add(new WallEntity(world, wallTexture,14.5f,25.60f));
             //listWall.add(new WallEntity(world, wallTexture,13.6f,25.60f));
             //listWall.add(new WallEntity(world, wallTexture,12.7f,25.60f));
-            destroyWall1 = new PassWallEntity(world, destroyWallTexture,14.5f,25.60f);
-            destroyWall2 = new PassWallEntity(world, destroyWallTexture,13.6f,25.60f);
-            destroyWall3 =  new PassWallEntity(world, destroyWallTexture,12.7f,25.60f);
+           listPassWall.add( passWall1 = new PassWallEntity(world, destroyWallTexture,14.5f,25.60f));
+            listPassWall.add(passWall2 = new PassWallEntity(world, destroyWallTexture,13.6f,25.60f));
+            listPassWall.add(passWall3 =  new PassWallEntity(world, destroyWallTexture,12.7f,25.60f));
 
 
             listWall.add(new WallEntity(world, wallTexture,11.8f,25.60f));
@@ -940,6 +1078,7 @@ public class GameLevel3Screen extends BaseScreen{
         }
 
         private void octavoCuadrante(){
+
 
             listWall.add(new WallEntity(world, wallTexture,4.60f,8.00f));
             listWall.add(new WallEntity(world, wallTexture,4.60f,7.20f));

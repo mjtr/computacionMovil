@@ -37,6 +37,8 @@ public class PlayerEntity extends Actor {
     private boolean isAlive = true;
 
 
+    private boolean choqueMuro = false;
+
     private boolean choqueMuroImpulso = false;
 
 
@@ -81,20 +83,24 @@ public class PlayerEntity extends Actor {
 
         if(isAlive()) {
 
+
+           // System.out.println("Player velocity = "  + body.getLinearVelocity());
             acelX += Gdx.input.getAccelerometerY();
             acelY -= Gdx.input.getAccelerometerX();
 
-            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
-                 characterX -= Gdx.graphics.getDeltaTime() * 5;
-            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT))
-                characterX += Gdx.graphics.getDeltaTime() * 5;
-            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP))
-                characterY += Gdx.graphics.getDeltaTime() * 5;
-            if(Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN))
-                characterY -= Gdx.graphics.getDeltaTime() * 5;
 
 
-            body.setLinearVelocity(characterX,characterY);
+                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
+                    characterX -= Gdx.graphics.getDeltaTime() * 5;
+                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT))
+                    characterX += Gdx.graphics.getDeltaTime() * 5;
+                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_UP))
+                    characterY += Gdx.graphics.getDeltaTime() * 5;
+                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN))
+                    characterY -= Gdx.graphics.getDeltaTime() * 5;
+
+                body.setLinearVelocity(characterX, characterY);
+
 
             if(choqueMuroImpulso == true){
 
@@ -130,8 +136,6 @@ public class PlayerEntity extends Actor {
     }
 
 
-
-
     public boolean isChoqueMuroImpulso() {
         return choqueMuroImpulso;
     }
@@ -140,5 +144,13 @@ public class PlayerEntity extends Actor {
         this.choqueMuroImpulso = choqueMuroImpulso;
     }
 
+
+    public boolean isChoqueMuro() {
+        return choqueMuro;
+    }
+
+    public void setChoqueMuro(boolean choqueMuro) {
+        this.choqueMuro = choqueMuro;
+    }
 
 }
