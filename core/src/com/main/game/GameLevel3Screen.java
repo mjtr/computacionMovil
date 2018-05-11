@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
+import com.main.game.entities.LifeEntity;
 import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
@@ -40,6 +41,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private FinishEntity finish;
 
+    private LifeEntity life;
+
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
 
     private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
@@ -55,7 +58,7 @@ public class GameLevel3Screen extends BaseScreen{
 
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
-            spikeTexture , spikeRighTexture,spikeLeftTexture ,background;
+            spikeTexture , spikeRighTexture,spikeLeftTexture , lifeTexture ,lifeTexture2,lifeTexture3,background;
 
 
 
@@ -82,9 +85,13 @@ public class GameLevel3Screen extends BaseScreen{
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
+        lifeTexture = game.getManager().get("vidaFull.png");
+        lifeTexture2 = game.getManager().get("vidaHalf.png");
+        lifeTexture3 = game.getManager().get("vidaCasiDeath.png");
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(true, 1280, 1240);
+
+        //camera = new OrthographicCamera();
+       // camera.setToOrtho(true, 1280, 1240);
 
 
 
@@ -100,16 +107,48 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(2,2)));
 
 
+        life =  new LifeEntity(world,lifeTexture , 12,2);
+
+
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
+
+                if(areCollided(contact,"player" , "spike")){
+
+                    if(life.getVida() == 600){
+
+
+                        life.setVida(life.getVida() - 300);
+
+                    }else{
+
+                        stage.addAction(
+                                Actions.sequence(
+
+                                        Actions.delay(0.5f),
+                                        Actions.run(new Runnable() {
+
+                                            public void run() {
+                                                game.setScreen(game.gameOverScreen);
+                                            }
+                                        })
+
+                                )
+
+
+                        );
+                    }
+
+
+                }
 
 
                 if(areCollided(contact,"player" , "finish")){
 
                     stage.addAction(
                             Actions.sequence(
-                                    Actions.delay(1.5f),
+                                    Actions.delay(0.5f),
                                     Actions.run(new Runnable() {
 
                                         public void run() {
@@ -187,6 +226,8 @@ public class GameLevel3Screen extends BaseScreen{
         stage.addActor(player);
         stage.addActor(finish);
 
+        stage.addActor(life);
+
 
         stage.addActor(impulseWall1);
         stage.addActor(impulseWall2);
@@ -251,7 +292,12 @@ public class GameLevel3Screen extends BaseScreen{
         stage.getBatch().begin();
         stage.getBatch().draw(background,Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         stage.getBatch().end();
-*/
+
+*/      if(life.getVida() == 600){
+
+            life =  new LifeEntity(world,lifeTexture2 , 12,2);
+            stage.addActor(life);
+            }
 
         stage.act();
         world.step(delta,6,2);
@@ -260,8 +306,8 @@ public class GameLevel3Screen extends BaseScreen{
         stage.draw();
 
 
-        stage.getCamera().position.set(player.getX(),player.getY(),0);
-        stage.getCamera().update();
+        //stage.getCamera().position.set(player.getX(),player.getY(),0);
+       // stage.getCamera().update();
 
     }
 

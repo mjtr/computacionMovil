@@ -44,20 +44,22 @@ public class MyGdxGame extends Game {
 		manager.load("conjuntoespinas.png",Texture.class);
 		manager.load("Espina.png",Texture.class);
 		manager.load("spikeLeft.png",Texture.class);
+		manager.load("vidaFull.png",Texture.class);
+		manager.load("vidaCasiDeath.png",Texture.class);
+		manager.load("vidaHalf.png",Texture.class);
 
 
 
 
 
 
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
+
+		//loadingScreen = new LoadingScreen(this);
+		//setScreen(loadingScreen);
 
 
-//		manager.finishLoading();
-
-
- //		setScreen(new GameLevel3Screen(this));
+		manager.finishLoading();
+ 		setScreen(new GameLevel3Screen(this));
 	}
 
 	public void finishLoading() {

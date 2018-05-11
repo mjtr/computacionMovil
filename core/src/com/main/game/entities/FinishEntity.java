@@ -22,7 +22,7 @@ public class FinishEntity extends Actor {
     private Fixture fixture;
 
     private Sprite sprite;
-    private int i = 0;
+    private float i = 0;
 
     private boolean tocaFin = false;
 
@@ -77,7 +77,7 @@ public class FinishEntity extends Actor {
 
     public void act(float delta) {
 
-        sprite.setRotation(i+=2);
+        sprite.setRotation(i+=0.7f);
         getStage().getBatch().begin();
         sprite.draw(getStage().getBatch());
         getStage().getBatch().end();

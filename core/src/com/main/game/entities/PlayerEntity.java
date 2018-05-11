@@ -153,4 +153,7 @@ public class PlayerEntity extends Actor {
         this.choqueMuro = choqueMuro;
     }
 
+
+
+
 }
