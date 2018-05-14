@@ -3,6 +3,7 @@ package com.main.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,6 +14,8 @@ public class LoadingScreen extends BaseScreen {
     private Stage stage;
     private Skin skin;
     private Label loading;
+    private Texture background;
+
 
     public LoadingScreen(MyGdxGame game) {
         super(game);
@@ -22,6 +25,7 @@ public class LoadingScreen extends BaseScreen {
         loading = new Label("Loading...", skin);
         loading.setPosition(320 - loading.getWidth() / 2, 180 - loading.getHeight() / 2);
         stage.addActor(loading);
+
     }
 
 

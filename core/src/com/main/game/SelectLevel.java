@@ -2,11 +2,9 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -30,7 +28,7 @@ public class SelectLevel extends BaseScreen{
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        background = game.getManager().get("Menu.png");
+        background = game.getManager().get("Select.png");
         button1 = game.getManager().get("background4.png");
         button2 = game.getManager().get("background.png");
         button3 = game.getManager().get("water.jpg");

@@ -22,6 +22,7 @@ public class MenuScreen extends BaseScreen{
     private TextButton ranking;
     private Texture background;
 
+
     public MenuScreen(final MyGdxGame game) {
         super(game);
 
@@ -49,7 +50,7 @@ public class MenuScreen extends BaseScreen{
         ranking.addCaptureListener(new ChangeListener() {
 
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(game.gameScreen);
+                game.setScreen(game.ranking);
             }
         });
         selectLevel.setSize(200,80);

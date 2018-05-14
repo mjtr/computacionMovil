@@ -11,7 +11,7 @@ public class MyGdxGame extends Game {
 	private AssetManager manager;
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
-			,gameLevel3Screen, selectLevel;
+			,gameLevel3Screen, selectLevel, ranking;
 
 
 	public AssetManager getManager() {
@@ -49,6 +49,7 @@ public class MyGdxGame extends Game {
 		manager.load("vidaHalf.png",Texture.class);
 		manager.load("Menu.png", Texture.class);
 		manager.load("Select.png",Texture.class);
+		manager.load("ranking.png", Texture.class);
 
 
 
@@ -61,7 +62,7 @@ public class MyGdxGame extends Game {
 
 
 		manager.finishLoading();
- 		setScreen(new MenuScreen(this));
+ 		setScreen(new LoadingScreen(this));
 	}
 
 	public void finishLoading() {
@@ -73,6 +74,7 @@ public class MyGdxGame extends Game {
 		gameLevel3Screen = new GameLevel3Screen(this);
 		endLevel2Screen = new EndLevel2Screen(this);
 		selectLevel = new SelectLevel(this);
+		ranking = new Ranking(this);
 
 		setScreen(menuScreen);
 	}
