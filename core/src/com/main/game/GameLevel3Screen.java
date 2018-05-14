@@ -86,8 +86,8 @@ public class GameLevel3Screen extends BaseScreen{
 
         health = 1f;
 
-        camera = new OrthographicCamera();
-        camera.setToOrtho(true, 1280, 1240);
+        //camera = new OrthographicCamera();
+        //camera.setToOrtho(true, 1280, 1240);
 
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
@@ -108,6 +108,7 @@ public class GameLevel3Screen extends BaseScreen{
             public void beginContact(Contact contact) {
 
                 if(areCollided(contact,"player" , "spike")){
+                    player.setSpikeCollision(true);
 
                     if(health > 0 ){
                         health -= 0.1f;
@@ -184,6 +185,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                 if(areCollided(contact, "player", "wall")){
                     player.setChoqueMuro(true);
+
                 }
 
             }
@@ -191,6 +193,8 @@ public class GameLevel3Screen extends BaseScreen{
             public void endContact(Contact contact) {
 
                 player.setChoqueMuro(false);
+                player.setSpikeCollision(false);
+                player.setChoqueMuroImpulso(false);
 
             }
 
@@ -241,9 +245,9 @@ public class GameLevel3Screen extends BaseScreen{
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
-        stage.getCamera().position.set(player.getX(),player.getY(),0);
-        stage.getCamera().position.set(position);
-        stage.getCamera().update();
+        //stage.getCamera().position.set(player.getX(),player.getY(),0);
+        //stage.getCamera().position.set(position);
+        //stage.getCamera().update();
     }
 
     public void hide() {
@@ -301,7 +305,7 @@ public class GameLevel3Screen extends BaseScreen{
         else
             game.batch.setColor(Color.RED);
 
-        game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth()/3 * health, 5);
+        game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth() * health, 6);
         game.batch.setColor(Color.WHITE);
 
         game.batch.end();
@@ -309,8 +313,8 @@ public class GameLevel3Screen extends BaseScreen{
         stage.draw();
 
 
-        stage.getCamera().position.set(player.getX(),player.getY(),0);
-        stage.getCamera().update();
+        //stage.getCamera().position.set(player.getX(),player.getY(),0);
+        //stage.getCamera().update();
 
     }
 

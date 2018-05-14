@@ -13,7 +13,6 @@ public class ExplosionEntity extends Actor {
 
 
     private World world;
-    private Texture texture;
 
     public static final float FRAME_LENGTH = 0.2f;
     public static final int OFFSET = 8;
@@ -32,7 +31,6 @@ public class ExplosionEntity extends Actor {
         this.y = y - OFFSET;
         statetime = 0;
         this.world = world;
-        this.texture = texture;
 
         if (anim == null)
             anim = new Animation(FRAME_LENGTH, TextureRegion.split(new Texture("explosion.png"), IMAGE_SIZE, IMAGE_SIZE)[0]);
