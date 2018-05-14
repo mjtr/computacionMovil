@@ -50,6 +50,11 @@ public class MyGdxGame extends Game {
 		manager.load("Menu.png", Texture.class);
 		manager.load("Select.png",Texture.class);
 		manager.load("ranking.png", Texture.class);
+		manager.load("blank.png",Texture.class);
+		manager.load("bullet.png",Texture.class);
+		manager.load("explosion.png",Texture.class);
+		manager.load("explosion1.png",Texture.class);
+		manager.load("explosion2.png",Texture.class);
 
 
 
