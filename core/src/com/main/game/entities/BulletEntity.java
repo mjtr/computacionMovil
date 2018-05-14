@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
@@ -16,10 +15,8 @@ import static com.main.game.Constans.PIXELS_IN_METER;
 public class BulletEntity extends Actor {
 
 
-    public static final int SPEED = 200;
-    public static final int DEFAULT_Y = 40;
-    public static final int WIDTH = 3;
-    public static final int HEIGHT = 12;
+    public static final float SPEED = 1.20f;
+
     private static Texture texture;
 
     private World world;
@@ -29,12 +26,13 @@ public class BulletEntity extends Actor {
 
 
     float speed;
+
     public boolean remove = false;
 
     public BulletEntity (World world, float x , float y) {
         this.world = world;
 
-        this.speed = DEFAULT_Y;
+        this.speed = SPEED;
 
         if (texture == null)
             texture = new Texture("bullet.png");
@@ -52,7 +50,7 @@ public class BulletEntity extends Actor {
 
         fixture = body.createFixture(box, 3);
 
-        fixture.setUserData("player");
+        fixture.setUserData("bullet");
         box.dispose();
 
         setSize(PIXELS_IN_METER, PIXELS_IN_METER);
@@ -63,6 +61,7 @@ public class BulletEntity extends Actor {
 
     public void act (float deltaTime) {
         speed += SPEED * deltaTime;
+        body.setLinearVelocity(0,speed);
         if (speed > 360)
             remove = true;
 

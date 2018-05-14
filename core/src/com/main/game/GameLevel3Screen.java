@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
+import com.main.game.entities.BulletEntity;
 import com.main.game.entities.ExplosionEntity;
 import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
@@ -44,6 +45,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private FinishEntity finish;
 
+    private int espera = 0;
+
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
     private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
     private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
@@ -52,6 +55,9 @@ public class GameLevel3Screen extends BaseScreen{
     private List<PassWallEntity> listPassWall = new ArrayList<PassWallEntity>();
     private List<ExplosionEntity> explosions = new ArrayList<ExplosionEntity>();
 
+    private List<BulletEntity> listBullets = new ArrayList<BulletEntity>();
+
+    private List<BulletEntity> bulletsToRemove = new ArrayList<BulletEntity>();
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
             spikeTexture , spikeRighTexture,spikeLeftTexture , lifeTexture ,lifeTexture2,lifeTexture3,background;
@@ -102,10 +108,16 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
+
+                if(areCollided(contact,"wall" , "bullet")){
+
+
+                  //  bulletsToRemove = listBullets;
+
+                }
 
                 if(areCollided(contact,"player" , "spike")){
                     player.setSpikeCollision(true);
@@ -233,13 +245,16 @@ public class GameLevel3Screen extends BaseScreen{
 
         }
 
-
         for (WallEntity wall : listWall){
             stage.addActor(wall);
         }
 
         for (BlackHoleEntity hole : listHole){
             stage.addActor(hole);
+        }
+
+        for (BulletEntity bullet : listBullets){
+            stage.addActor(bullet);
         }
 
 
@@ -282,12 +297,22 @@ public class GameLevel3Screen extends BaseScreen{
         world.step(delta,6,2);
 
 
+        if(espera > 100) {
+
+            listBullets.add(new BulletEntity(world, 4.6f, 36));
+            listBullets.add(new BulletEntity(world, 5.6f, 36));
+            espera = 0;
+        }
+        espera ++;
+
 
         for (ExplosionEntity explosion : explosions) {
             explosion.render(game.batch);
         }
 
         game.batch.begin();
+
+
         //Update explosions
         ArrayList<ExplosionEntity> explosionsToRemove = new ArrayList<ExplosionEntity>();
         for (ExplosionEntity explosion : explosions) {
@@ -296,6 +321,18 @@ public class GameLevel3Screen extends BaseScreen{
                 explosionsToRemove.add(explosion);
         }
         explosions.removeAll(explosionsToRemove);
+
+
+        //Update bullets
+        for (BulletEntity bullet : listBullets) {
+            bullet.act(delta);
+            if (bullet.remove)
+                bulletsToRemove.add(bullet);
+        }
+
+        listBullets.removeAll(bulletsToRemove);
+
+
 
         //Draw health
         if (health > 0.6f)
@@ -307,6 +344,11 @@ public class GameLevel3Screen extends BaseScreen{
 
         game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth() * health, 6);
         game.batch.setColor(Color.WHITE);
+
+        //Draw bullets
+        for (BulletEntity bullet : listBullets) {
+            bullet.render(game.batch);
+        }
 
         game.batch.end();
 
