@@ -2,6 +2,7 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
-import com.main.game.entities.LifeEntity;
+import com.main.game.entities.ExplosionEntity;
 import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
@@ -34,6 +35,8 @@ public class GameLevel3Screen extends BaseScreen{
     private OrthographicCamera camera;
     private Vector3 position;
 
+    private float health;
+
     private boolean deathWall = false;
 
 
@@ -41,27 +44,20 @@ public class GameLevel3Screen extends BaseScreen{
 
     private FinishEntity finish;
 
-    private LifeEntity life;
-
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
-
     private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
-
-
     private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
-
     private ImpulseWallEntity impulseWall1 , impulseWall2;
-
-
     private PassWallEntity passWall1, passWall2, passWall3,passWall4,passWall5,passWall6,passWall7,passWall8,passWall9;
     private List<PassWallEntity> listPassWall = new ArrayList<PassWallEntity>();
+    private List<ExplosionEntity> explosions = new ArrayList<ExplosionEntity>();
 
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
             spikeTexture , spikeRighTexture,spikeLeftTexture , lifeTexture ,lifeTexture2,lifeTexture3,background;
 
-
-
+    //Textura para la vida
+    private Texture blank;
 
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
@@ -75,7 +71,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     public void show() {
 
-        playerTexture = game.getManager().get("Magicball.png");
+        playerTexture = game.getManager().get("ball.png");
         finishTexture = game.getManager().get("finish2.png");
         wallTexture = game.getManager().get("wallYellow.png");
         holeTexture = game.getManager().get("holepeq.png");
@@ -85,16 +81,13 @@ public class GameLevel3Screen extends BaseScreen{
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
-        lifeTexture = game.getManager().get("vidaFull.png");
-        lifeTexture2 = game.getManager().get("vidaHalf.png");
-        lifeTexture3 = game.getManager().get("vidaCasiDeath.png");
 
+        blank = new Texture("blank.png");
 
-        //camera = new OrthographicCamera();
-       // camera.setToOrtho(true, 1280, 1240);
+        health = 1f;
 
-
-
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, 1280, 1240);
 
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
@@ -105,9 +98,9 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,26)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(41,5)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(2,2)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(4,3)));
 
 
-        life =  new LifeEntity(world,lifeTexture , 12,2);
 
 
         world.setContactListener(new ContactListener() {
@@ -116,12 +109,10 @@ public class GameLevel3Screen extends BaseScreen{
 
                 if(areCollided(contact,"player" , "spike")){
 
-                    if(life.getVida() == 600){
+                    if(health > 0 ){
+                        health -= 0.1f;
 
-
-                        life.setVida(life.getVida() - 300);
-
-                    }else{
+                    }else {
 
                         stage.addAction(
                                 Actions.sequence(
@@ -133,16 +124,10 @@ public class GameLevel3Screen extends BaseScreen{
                                                 game.setScreen(game.gameOverScreen);
                                             }
                                         })
-
                                 )
-
-
                         );
                     }
-
-
                 }
-
 
                 if(areCollided(contact,"player" , "finish")){
 
@@ -205,6 +190,8 @@ public class GameLevel3Screen extends BaseScreen{
 
             public void endContact(Contact contact) {
 
+                player.setChoqueMuro(false);
+
             }
 
             public void preSolve(Contact contact, Manifold oldManifold) {
@@ -226,7 +213,6 @@ public class GameLevel3Screen extends BaseScreen{
         stage.addActor(player);
         stage.addActor(finish);
 
-        stage.addActor(life);
 
 
         stage.addActor(impulseWall1);
@@ -255,9 +241,9 @@ public class GameLevel3Screen extends BaseScreen{
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
-       // stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().position.set(position);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().position.set(position);
+        stage.getCamera().update();
     }
 
     public void hide() {
@@ -278,36 +264,53 @@ public class GameLevel3Screen extends BaseScreen{
     public void dispose() {
         world.dispose();
         stage.dispose();
+        game.batch.dispose();
     }
 
     public void render(float delta) {
 
         //Gdx.gl.glClearColor(0.2f,0.2f,0.1f,1f);
         Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
-
-        // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        /*
-        stage.getBatch().begin();
-        stage.getBatch().draw(background,Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        stage.getBatch().end();
-
-*/      if(life.getVida() == 600){
-
-            life =  new LifeEntity(world,lifeTexture2 , 12,2);
-            stage.addActor(life);
-            }
 
         stage.act();
         world.step(delta,6,2);
 
 
+
+        for (ExplosionEntity explosion : explosions) {
+            explosion.render(game.batch);
+        }
+
+        game.batch.begin();
+        //Update explosions
+        ArrayList<ExplosionEntity> explosionsToRemove = new ArrayList<ExplosionEntity>();
+        for (ExplosionEntity explosion : explosions) {
+            explosion.update(delta);
+            if (explosion.remove)
+                explosionsToRemove.add(explosion);
+        }
+        explosions.removeAll(explosionsToRemove);
+
+        //Draw health
+        if (health > 0.6f)
+            game.batch.setColor(Color.GREEN);
+        else if (health > 0.2f)
+            game.batch.setColor(Color.ORANGE);
+        else
+            game.batch.setColor(Color.RED);
+
+        game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth()/3 * health, 5);
+        game.batch.setColor(Color.WHITE);
+
+        game.batch.end();
+
         stage.draw();
 
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-       // stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().update();
 
     }
 
@@ -325,6 +328,7 @@ public class GameLevel3Screen extends BaseScreen{
                 || userDataA.equals(userB) && userDataB.equals(userA) );
 
     }
+
 
 
     private void creacionEspinas(){
@@ -442,6 +446,15 @@ public class GameLevel3Screen extends BaseScreen{
         listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,28.00f));
         listSpikes.add(new SpikeEntity(world, spikeLeftTexture,62.1f,28.80f));
 
+
+        //Pinchos en la esquina superior izquierda, nada más empezar el juego
+
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 30.40f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 31.20f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 32.00f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 32.80f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 33.60f));
+        listSpikes.add(new SpikeEntity(world, spikeRighTexture,1.9f, 34.40f));
 
     }
 

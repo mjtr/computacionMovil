@@ -3,12 +3,16 @@ package com.main.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MyGdxGame extends Game {
 
 
 
 	private AssetManager manager;
+
+	public SpriteBatch batch;
+
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
 			,gameLevel3Screen, selectLevel, ranking;
@@ -21,6 +25,7 @@ public class MyGdxGame extends Game {
 
 	public void create() {
 
+		batch = new SpriteBatch();
 		manager = new AssetManager();
 		manager.load("wallRedPeq.png", Texture.class);
 		manager.load("wallYellow.png", Texture.class);
@@ -59,15 +64,12 @@ public class MyGdxGame extends Game {
 
 
 
+		loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
 
 
-
-		//loadingScreen = new LoadingScreen(this);
-		//setScreen(loadingScreen);
-
-
-		manager.finishLoading();
- 		setScreen(new LoadingScreen(this));
+		//manager.finishLoading();
+ 		//setScreen(new GameLevel3Screen(this));
 	}
 
 	public void finishLoading() {
@@ -84,6 +86,7 @@ public class MyGdxGame extends Game {
 		setScreen(menuScreen);
 	}
 
-
-
+	public void render() {
+		super.render();
+	}
 }

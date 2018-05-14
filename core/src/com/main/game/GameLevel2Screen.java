@@ -103,9 +103,15 @@ public class GameLevel2Screen extends BaseScreen {
                     );
                 }
 
+                if(areCollided(contact, "player", "wall")){
+                    player.setChoqueMuro(true);
+                }
+
             }
 
             public void endContact(Contact contact) {
+
+                player.setChoqueMuro(false);
 
             }
 

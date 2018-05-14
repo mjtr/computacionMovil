@@ -89,11 +89,19 @@ public class GameScreen extends BaseScreen {
                      )
              );
              }
+
+                if(areCollided(contact, "player", "wall")){
+                    player.setChoqueMuro(true);
+                }
+
             }
 
             public void endContact(Contact contact) {
 
+                player.setChoqueMuro(false);
+
             }
+
             public void preSolve(Contact contact, Manifold oldManifold) {
 
             }
@@ -119,12 +127,12 @@ public class GameScreen extends BaseScreen {
         player.detach();
         player.remove();
 
-        for (WallEntity wall : listWall){
+        /*for (WallEntity wall : listWall){
             wall.detach();
             wall.remove();
         }
         fin.detach();
-        fin.remove();
+        fin.remove();*/
     }
 
     public void render(float delta) {

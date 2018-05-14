@@ -43,8 +43,6 @@ public class PlayerEntity extends Actor {
 
 
 
-
-
     public PlayerEntity(World world, Texture texture, Vector2 position) {
 
 
@@ -89,6 +87,11 @@ public class PlayerEntity extends Actor {
             acelY -= Gdx.input.getAccelerometerX();
 
 
+            if(choqueMuro == true ){
+                characterX = -characterX * 0.1f;
+                characterY = -characterY * 0.1f;
+                choqueMuro = false;
+            }
 
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
                     characterX -= Gdx.graphics.getDeltaTime() * 5;
@@ -102,17 +105,28 @@ public class PlayerEntity extends Actor {
                 body.setLinearVelocity(characterX, characterY);
 
 
-            if(choqueMuroImpulso == true){
+/*
+                if(choqueMuro == true && acelY != 0 && acelX !=0){
+                    acelY = 0;
+                    acelX = 0;
+                }
+*/
+
+
+                System.out.println("El characterX es : " + characterX);
+                System.out.println("El characterY es : " + characterY);
+
+
+
+           /* if(choqueMuroImpulso == true){
 
                // body.applyForceToCenter( -(acelX * 10) , - (acelY * 10),true );
                 // body.applyLinearImpulse(-(acelX + 20), - (acelY  - 20 ) , body.getPosition().x,body.getPosition().y,true);
                 choqueMuroImpulso = false;
-            }
-
-            /*else {
-
-                body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
             }*/
+
+               // body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+
 
         }
 
