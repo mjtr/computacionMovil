@@ -65,6 +65,13 @@ public class GameLevel3Screen extends BaseScreen{
     //Textura para la vida
     private Texture blank;
 
+
+
+    private BulletEntity bullet1, bullet2;
+
+
+
+
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
         stage  = new Stage(new FillViewport(640,360));
@@ -112,10 +119,11 @@ public class GameLevel3Screen extends BaseScreen{
 
             public void beginContact(Contact contact) {
 
-                if(areCollided(contact,"wall" , "bullet")){
+                if(areCollided(contact,"wall" , "bullets")){
 
-
-                  //  bulletsToRemove = listBullets;
+                    System.out.println("muro y bala han colisionado");
+                    bullet1.remove();
+                    bullet2.remove();
 
                 }
 
@@ -258,6 +266,7 @@ public class GameLevel3Screen extends BaseScreen{
         }
 
 
+
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
         //stage.getCamera().position.set(player.getX(),player.getY(),0);
@@ -297,10 +306,16 @@ public class GameLevel3Screen extends BaseScreen{
         world.step(delta,6,2);
 
 
-        if(espera > 100) {
+        if(espera > 300) {
 
-            listBullets.add(new BulletEntity(world, 4.6f, 36));
-            listBullets.add(new BulletEntity(world, 5.6f, 36));
+          //  listBullets.add(new BulletEntity(world, 4.6f, 37));
+           // listBullets.add(new BulletEntity(world, 5.6f, 37));
+           bullet1 =  new BulletEntity(world, 7.6f, 38);
+            bullet2 = new BulletEntity(world, 8.6f, 38);
+
+            stage.addActor(bullet1);
+            stage.addActor(bullet2);
+
             espera = 0;
         }
         espera ++;
@@ -324,13 +339,27 @@ public class GameLevel3Screen extends BaseScreen{
 
 
         //Update bullets
-        for (BulletEntity bullet : listBullets) {
+        /*for (BulletEntity bullet : listBullets) {
             bullet.act(delta);
             if (bullet.remove)
                 bulletsToRemove.add(bullet);
+        }*/
+
+        //listBullets.removeAll(bulletsToRemove);
+
+
+        if(bullet1 != null && bullet2!= null) {
+
+            bullet1.act(delta);
+            bullet2.act(delta);
+            bullet1.draw(game.batch,delta);
+            bullet2.draw(game.batch,delta);
+
+            // bullet1.render(game.batch);
+            // bullet2.render(game.batch);
+
         }
 
-        listBullets.removeAll(bulletsToRemove);
 
 
 
@@ -346,13 +375,16 @@ public class GameLevel3Screen extends BaseScreen{
         game.batch.setColor(Color.WHITE);
 
         //Draw bullets
-        for (BulletEntity bullet : listBullets) {
+        /*for (BulletEntity bullet : listBullets) {
             bullet.render(game.batch);
-        }
+        }*/
+
+
 
         game.batch.end();
 
         stage.draw();
+
 
 
         //stage.getCamera().position.set(player.getX(),player.getY(),0);
