@@ -64,7 +64,7 @@ public class PlayerEntity extends Actor {
         CircleShape box = new CircleShape();
         box.setRadius(0.5f);
 
-        fixture = body.createFixture(box, 3);
+        fixture = body.createFixture(box, 1);
 
         fixture.setUserData("player");
         box.dispose();
@@ -124,10 +124,6 @@ public class PlayerEntity extends Actor {
                     acelX = 0;
                 }
 */
-
-
-
-
                // body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
 
 

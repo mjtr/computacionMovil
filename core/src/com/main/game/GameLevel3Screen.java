@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.BulletEntity;
 import com.main.game.entities.ExplosionEntity;
+import com.main.game.entities.MoveWallEntity;
 import com.main.game.entities.PassWallEntity;
 import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
@@ -47,6 +48,10 @@ public class GameLevel3Screen extends BaseScreen{
 
     private int espera = 0;
 
+    private int esperaMuro = 0;
+
+    private float stat;
+
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
     private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
     private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
@@ -60,16 +65,14 @@ public class GameLevel3Screen extends BaseScreen{
     private List<BulletEntity> bulletsToRemove = new ArrayList<BulletEntity>();
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
-            spikeTexture , spikeRighTexture,spikeLeftTexture , lifeTexture ,lifeTexture2,lifeTexture3,background;
+            spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture,background;
 
     //Textura para la vida
     private Texture blank;
 
-
-
     private BulletEntity bullet1, bullet2;
 
-
+    private MoveWallEntity moveWall1;
 
 
     public GameLevel3Screen(MyGdxGame game) {
@@ -80,7 +83,6 @@ public class GameLevel3Screen extends BaseScreen{
         position = new Vector3(stage.getCamera().position);
 
     }
-
 
     public void show() {
 
@@ -94,6 +96,7 @@ public class GameLevel3Screen extends BaseScreen{
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
+        moveWallTexture = game.getManager().get("circleSpikes4.png");
 
         blank = new Texture("blank.png");
 
@@ -114,10 +117,18 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(4,3)));
 
 
+        moveWall1 = new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f);
 
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
+
+
+                if(areCollided(contact,"player", "movewall")){
+
+                      moveWall1.setOrigin(5.40f,28.80f);
+
+                }
 
                 if(areCollided(contact,"wall" , "bullets")){
 
@@ -265,6 +276,8 @@ public class GameLevel3Screen extends BaseScreen{
             stage.addActor(bullet);
         }
 
+        stage.addActor(moveWall1);
+
 
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
@@ -287,6 +300,9 @@ public class GameLevel3Screen extends BaseScreen{
         listWall.clear();
         listHole.clear();
 
+        moveWall1.detach();
+        moveWall1.remove();
+
     }
 
     public void dispose() {
@@ -301,11 +317,9 @@ public class GameLevel3Screen extends BaseScreen{
         Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
         stage.act();
         world.step(delta,6,2);
-
-
+        stat = delta;
         if(espera > 300) {
 
           //  listBullets.add(new BulletEntity(world, 4.6f, 37));
@@ -348,7 +362,7 @@ public class GameLevel3Screen extends BaseScreen{
         //listBullets.removeAll(bulletsToRemove);
 
 
-        if(bullet1 != null && bullet2!= null) {
+       /*  if(bullet1 != null && bullet2!= null) {
 
             bullet1.act(delta);
             bullet2.act(delta);
@@ -359,9 +373,7 @@ public class GameLevel3Screen extends BaseScreen{
             // bullet2.render(game.batch);
 
         }
-
-
-
+*/
 
         //Draw health
         if (health > 0.6f)

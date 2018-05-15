@@ -60,6 +60,12 @@ public class MyGdxGame extends Game {
 		manager.load("explosion.png",Texture.class);
 		manager.load("explosion1.png",Texture.class);
 		manager.load("explosion2.png",Texture.class);
+		manager.load("circleSpikes.png",Texture.class);
+		manager.load("circleSpikes2.png",Texture.class);
+		manager.load("circleSpikes3.jpg",Texture.class);
+		manager.load("circleSpikes4.png",Texture.class);
+
+
 
 
 
