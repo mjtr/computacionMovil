@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "213424354303",
+    "firebase_url": "https://proyectocanica-ba07a.firebaseio.com",
+    "project_id": "proyectocanica-ba07a",
+    "storage_bucket": "proyectocanica-ba07a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213424354303:android:f026a7d2465cdb65",
+        "android_client_info": {
+          "package_name": "com.main.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213424354303-9nnkcuhamqpr8dnsejlj10dnefk8tbab.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.main.game",
+            "certificate_hash": "1bb6fe5ecd38c446be1f7abc221a95ec3cd12cd4"
+          }
+        },
+        {
+          "client_id": "213424354303-6qlbj2bkn3srdnq4l1mjtc63ubl4ml2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQZEiyLjkf8L7m5aP31VXeMulmdKb4gy4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213424354303-6qlbj2bkn3srdnq4l1mjtc63ubl4ml2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,34 +3,86 @@ package com.main.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class Ranking extends BaseScreen{
+    /*
+    Primero llamamos a las preferencias:
+    Preferences pref = Gdx.app.getPreferences("leaderboard");
+
+    Para leer de las preferencias:
+     String name = prefs.getString("name", "No name stored");
+
+    Para escribir en las preferencias:
+    prefs.putString("name", "Donald Duck");
+    prefs.flush(); IMPORTANTE EL FLUSH, si no no se sobreescriben.
+
+    ejemplo para nuestro caso:
+    for(
+
+     */
 
     private Stage stage;
     private Skin skin;
+    private TextButton back;
+    private Label first;
+    private Label second;
+    private Label third;
+    private Label fourth;
+    private Label fifth;
     // private Image logo;
-
     private Texture background;
+
+    Preferences pref = Gdx.app.getPreferences("leaderboard");
 
     public Ranking(final MyGdxGame game) {
         super(game);
-
-
-
         stage = new Stage(new FitViewport(640, 360));
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        back = new TextButton("Back", skin);
+
+        back.addCaptureListener(new ChangeListener() {
+
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.menuScreen);
+            }
+        });
+        back.setSize(40, 20);
+        back.setPosition(10, 340);
+        stage.addActor(back);
+
+
 
         background = game.getManager().get("ranking.png");
 
+        first = new Label("1º PLACE: "+pref.getString("1", "Vamos"), skin);
+        first.setPosition(320 - first.getWidth() / 2, 208 - first.getHeight() / 2);
+        stage.addActor(first);
 
+        second = new Label("2º PLACE: "+pref.getString("2","puedes"), skin);
+        second.setPosition(320 - second.getWidth() / 2, 168 - second.getHeight() / 2);
+        stage.addActor(second);
 
+        third = new Label("3º PLACE: "+pref.getString("3", "conseguirlo"), skin);
+        third.setPosition(320 - third.getWidth() / 2, 128 - third.getHeight() / 2);
+        stage.addActor(third);
+
+        fourth = new Label("4º PLACE: "+pref.getString("4", "creyendo"), skin);
+        fourth.setPosition(320 - fourth.getWidth() / 2, 88 - fourth.getHeight() / 2);
+        stage.addActor(fourth);
+
+        fifth = new Label("5º PLACE: "+pref.getString("5", "en ti"), skin);
+        fifth.setPosition(320 - fifth.getWidth() / 2, 48 - fifth.getHeight() / 2);
+        stage.addActor(fifth);
     }
 
 
