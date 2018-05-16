@@ -75,7 +75,7 @@ public class MyGdxGame extends Game {
 
 
 		manager.finishLoading();
- 		setScreen(new GameLevel3Screen(this));
+ 		setScreen(new LoadingScreen(this));
 	}
 
 	public void finishLoading() {
