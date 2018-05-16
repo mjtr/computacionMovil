@@ -12,10 +12,11 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import static com.main.game.Constans.PIXELS_IN_METER;
 
-public class BulletEntity extends Actor {
+public class BulletHorizontalEntity extends Actor {
 
 
-    public static final float SPEED = 100;
+
+    public static final float SPEEDHORIZONTAL = 700;
 
 
     private Texture texture;
@@ -25,18 +26,17 @@ public class BulletEntity extends Actor {
     private Fixture fixture;
 
 
-
     float speed, aux;
 
     public boolean remove = false;
 
-    public BulletEntity (World world, float x , float y) {
+    public BulletHorizontalEntity (World world, float x , float y) {
         this.world = world;
 
-        this.speed = SPEED;
+        this.speed = SPEEDHORIZONTAL;
 
         if (texture == null)
-            texture = new Texture("bullet5.png");
+            texture = new Texture("bulletHorizontal.png");
 
 
         BodyDef def = new BodyDef();
@@ -46,13 +46,13 @@ public class BulletEntity extends Actor {
         bodyBullet = world.createBody(def);
 
         PolygonShape box = new PolygonShape();
-        box.setAsBox(0.5f,0.5f);
+        box.setAsBox(0.3f,0.3f);
 
         fixture = bodyBullet.createFixture(box, 2);
 
 
 
-        fixture.setUserData("bullets");
+        fixture.setUserData("bulletHorizontal");
         box.dispose();
 
         setSize(PIXELS_IN_METER/2, PIXELS_IN_METER);
@@ -68,16 +68,20 @@ public class BulletEntity extends Actor {
 
 
     public void act (float delta) {
-        speed = SPEED * delta;
-        aux += SPEED * delta;
-        bodyBullet.setLinearVelocity(0,speed);
+        speed = SPEEDHORIZONTAL * delta;
+        aux += SPEEDHORIZONTAL * delta;
+        bodyBullet.setLinearVelocity(speed,0);
         if (aux > 360)
             remove = true;
 
     }
     public void detach() {
+
         bodyBullet.destroyFixture(fixture);
         world.destroyBody(bodyBullet);
     }
+
+
+
 
 }

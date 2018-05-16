@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.BulletEntity;
+import com.main.game.entities.BulletHorizontalEntity;
 import com.main.game.entities.ExplosionEntity;
 import com.main.game.entities.MoveWallEntity;
 import com.main.game.entities.PassWallEntity;
@@ -27,6 +29,7 @@ import com.main.game.entities.FinishEntity;
 import com.main.game.entities.ImpulseWallEntity;
 import com.main.game.entities.PlayerEntity;
 import com.main.game.entities.SpikeEntity;
+import com.main.game.entities.TurretEntity;
 import com.main.game.entities.WallEntity;
 
 import java.util.ArrayList;
@@ -41,20 +44,32 @@ public class GameLevel3Screen extends BaseScreen{
 
     private float health;
 
-    private boolean deathWall = false;
-
+    private Sprite fondo;
 
     private PlayerEntity player;
 
     private FinishEntity finish;
 
-    private int espera = 0;
+    private int espera = 0, esperaHorizontal = 0;
+    private int esperaBorrar = 0 ,esperaBorrarHorizontal = 0;
+    private int espera2 = 0, esperaHorizontal2 = 0;
+    private int esperaBorrar2 = 0 ,esperaBorrarHorizontal2 = 0;
 
+
+    private boolean bulletColision = false;
+    private boolean bulletHorizontalColision = false;
+
+<<<<<<< HEAD
     private Sound golpe, hole, laser;
 
     private int esperaMuro = 0;
+=======
+    private boolean bulletHorizontalWallColision = false;
+>>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
 
     private float stat;
+
+    private int esperaChocaMoveWall = 1;
 
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
     private List<SpikeEntity> listSpikes = new ArrayList<SpikeEntity>();
@@ -68,22 +83,25 @@ public class GameLevel3Screen extends BaseScreen{
 
     private List<BulletEntity> listBullets = new ArrayList<BulletEntity>();
 
-    private List<BulletEntity> bulletsToRemove = new ArrayList<BulletEntity>();
-
     private List<MoveWallEntity> listMovewall = new ArrayList<MoveWallEntity>();
 
+    private List<BulletHorizontalEntity> listBulletHorizontal = new ArrayList<BulletHorizontalEntity>();
+    private List<BulletHorizontalEntity> listBulletHorizontal2 = new ArrayList<BulletHorizontalEntity>();
+
+
+    private TurretEntity turret, turret2,turret3;
+
+
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
-            spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture,background;
+            spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture, turretTexture ;
 
-    //Textura para la vida
-    private Texture blank;
-
-    private BulletEntity bullet1, bullet2;
-
-    private MoveWallEntity moveWall1;
-
+<<<<<<< HEAD
     private Music fondo;
 
+=======
+    //Textura para la vida
+    private Texture blank;
+>>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
 
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
@@ -91,10 +109,14 @@ public class GameLevel3Screen extends BaseScreen{
         world = new World(new Vector2(0,0), true);
 
         position = new Vector3(stage.getCamera().position);
+<<<<<<< HEAD
         fondo = game.getManager().get("Fondo.mp3");
         golpe = game.getManager().get("Golpe.mp3");
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1.mp3");
+=======
+        fondo = new Sprite(new Texture("water.jpg"));
+>>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
 
     }
 
@@ -109,25 +131,35 @@ public class GameLevel3Screen extends BaseScreen{
         holeTexture = game.getManager().get("holepeq.png");
         impulseWallTexture = game.getManager().get("wallblue.png");
         destroyWallTexture = game.getManager().get("whitewall.png");
-        background = game.getManager().get("water.jpg");
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
+<<<<<<< HEAD
         moveWallTexture = game.getManager().get("circleSpikes4.png");
         golpe = game.getManager().get("Golpe.mp3");
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1");
+=======
+        moveWallTexture = game.getManager().get("CircleGordo2.png");
+        turretTexture = game.getManager().get("turret2.png");
+>>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
 
         blank = new Texture("blank.png");
 
         health = 1f;
 
-        //camera = new OrthographicCamera();
-        //camera.setToOrtho(true, 1280, 1240);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, 1280, 1240);
 
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
         player = new PlayerEntity(world,playerTexture, new Vector2(50.30f,33.3f));
+
+        turret = new TurretEntity(world,turretTexture,10,2);
+        turret2 = new TurretEntity(world,turretTexture,10,1);
+        turret3 = new TurretEntity(world,turretTexture,6,7.5f);
+
+
 
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(8,17)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(24,15)));
@@ -135,21 +167,95 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(41,5)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(2,2)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(4,3)));
+        listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(6,6)));
+
 
         listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
-        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
-        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
-        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
-        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
-        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 6.60f , 20f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 19.50f , 22.0f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 14.50f , 18.0f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 18.30f , 12.0f));
 
-        //moveWall1 = new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f);
-        //moveWall2 =
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 50.30f , 18.50f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 40.30f , 18.50f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 30.30f , 18.50f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 54.30f , 30.0f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 56.30f , 13.0f));
+
+
 
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
 
+                if(areCollided(contact, "player" , "bullets")){
+
+                    System.out.println("jugador y bala han colisionado");
+                    bulletColision = true;
+
+                    if(health > 0 ){
+                        health -= 0.1f;
+
+                    }else {
+
+                        stage.addAction(
+                                Actions.sequence(
+
+                                        Actions.delay(0.5f),
+                                        Actions.run(new Runnable() {
+
+                                            public void run() {
+                                                game.setScreen(game.gameOverScreen);
+                                            }
+                                        })
+                                )
+                        );
+                    }
+
+                }
+
+                if(areCollided(contact, "spike" , "bulletHorizontal")){
+
+                    System.out.println("spike y balaH han colisionado");
+                    bulletHorizontalColision = true;
+
+                }
+
+                if(areCollided(contact, "player" , "bulletHorizontal")){
+
+                    System.out.println("player y balaH han colisionado");
+                    bulletHorizontalColision = true;
+                    bulletHorizontalWallColision = true;
+
+                    if(health > 0 ){
+                        health -= 0.1f;
+
+                    }else {
+
+                        stage.addAction(
+                                Actions.sequence(
+
+                                        Actions.delay(0.5f),
+                                        Actions.run(new Runnable() {
+
+                                            public void run() {
+                                                game.setScreen(game.gameOverScreen);
+                                            }
+                                        })
+                                )
+                        );
+                    }
+
+                }
+
+                if(areCollided(contact, "wall" , "bulletHorizontal")){
+
+                    System.out.println("bulleth y wall han colisionado");
+                    bulletHorizontalWallColision = true;
+
+
+
+                }
 
                 if(areCollided(contact,"player", "movewall")){
 
@@ -176,9 +282,8 @@ public class GameLevel3Screen extends BaseScreen{
 
                 if(areCollided(contact,"wall" , "bullets")){
 
-                    System.out.println("muro y bala han colisionado");
-                    bullet1.remove();
-                    bullet2.remove();
+                       // System.out.println("muro y bala han colisionado");
+                            bulletColision = true;
 
                 }
 
@@ -318,24 +423,40 @@ public class GameLevel3Screen extends BaseScreen{
             stage.addActor(hole);
         }
 
-        for (BulletEntity bullet : listBullets){
-            stage.addActor(bullet);
-        }
-
         for (MoveWallEntity movewall : listMovewall){
 
             stage.addActor(movewall);
         }
 
-        //stage.addActor(moveWall1);
+        listBulletHorizontal.add(new BulletHorizontalEntity(world,11f,2.7f));
+        listBulletHorizontal.add(new BulletHorizontalEntity(world,11f,1.4f));
 
+        listBulletHorizontal2.add(new BulletHorizontalEntity(world,7f,8f));
+
+        stage.addActor(listBulletHorizontal2.get(0));
+
+        listBullets.add(new BulletEntity(world,8.50f,28.0f));
+        listBullets.add(new BulletEntity(world,9.50f,28.00f));
+
+        for (BulletEntity bullet : listBullets){
+
+            stage.addActor(bullet);
+        }
+
+        for (BulletHorizontalEntity bullet : listBulletHorizontal){
+            stage.addActor(bullet);
+        }
+
+        stage.addActor(turret);
+        stage.addActor(turret2);
+        stage.addActor(turret3);
 
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().position.set(position);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().position.set(position);
+        stage.getCamera().update();
     }
 
     public void hide() {
@@ -351,9 +472,7 @@ public class GameLevel3Screen extends BaseScreen{
         listWall.clear();
         listHole.clear();
 
-        moveWall1.detach();
-        moveWall1.remove();
-
+        listMovewall.clear();
     }
 
     public void dispose() {
@@ -364,67 +483,166 @@ public class GameLevel3Screen extends BaseScreen{
 
     public void render(float delta) {
 
-        //Gdx.gl.glClearColor(0.2f,0.2f,0.1f,1f);
-        Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
+        //Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.batch.begin();
+        fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        fondo.draw(game.batch);
+        game.batch.end();
 
         stage.act();
         world.step(delta,6,2);
         stat = delta;
-        if(espera > 300) {
 
-          //  listBullets.add(new BulletEntity(world, 4.6f, 37));
-           // listBullets.add(new BulletEntity(world, 5.6f, 37));
-           bullet1 =  new BulletEntity(world, 7.6f, 38);
-            bullet2 = new BulletEntity(world, 8.6f, 38);
 
-            stage.addActor(bullet1);
-            stage.addActor(bullet2);
+
+        if(esperaChocaMoveWall >= 200){
+
+            for(MoveWallEntity wall : listMovewall){
+
+                if(wall.tocaBajar == true){
+
+                    wall.tocaBajar = false;
+                    wall.tocaSubir = true;
+
+                }else if (wall.tocaSubir == true){
+
+                    wall.tocaBajar = true;
+                    wall.tocaSubir = false;
+
+                }
+
+
+            }
+
+            esperaChocaMoveWall = 0;
+
+        }
+
+        esperaChocaMoveWall++;
+
+
+
+        if(espera >= 201) {
+
+            listBullets.set(0,new BulletEntity(world,8.50f,28.0f));
+            listBullets.set(1,new BulletEntity(world,9.50f,28.00f));
+
+
+            for (BulletEntity bullet : listBullets){
+                stage.addActor(bullet);
+            }
 
             espera = 0;
         }
         espera ++;
 
 
-        for (ExplosionEntity explosion : explosions) {
-            explosion.render(game.batch);
+        if(esperaBorrar > 50 && bulletColision == true) {
+
+                if (listBullets.size() >= 2) {
+
+                    listBullets.get(0).detach();
+                    listBullets.get(0).remove();
+                    listBullets.get(1).detach();
+                    listBullets.get(1).remove();
+
+                }
+
+                bulletColision = false;
+
+            esperaBorrar = 0;
         }
+        esperaBorrar++;
+
+
+
+        if(esperaHorizontal > 301 && bulletHorizontalColision == false) {
+
+            listBulletHorizontal.set(0,new BulletHorizontalEntity(world,11f,2.7f));
+            listBulletHorizontal.set(1,new BulletHorizontalEntity(world,11f,1.4f));
+
+
+            for (BulletHorizontalEntity bullet : listBulletHorizontal){
+                stage.addActor(bullet);
+            }
+
+            esperaHorizontal = 0;
+        }
+
+        esperaHorizontal++;
+
+
+
+        if( bulletHorizontalColision == true && esperaBorrarHorizontal > 100 ) {
+
+                if (listBulletHorizontal.size() >= 2) {
+
+                    listBulletHorizontal.get(0).detach();
+                    listBulletHorizontal.get(1).detach();
+                    listBulletHorizontal.get(0).remove();
+                    listBulletHorizontal.get(1).remove();
+
+
+                }
+
+                bulletHorizontalColision = false;
+            esperaBorrarHorizontal = 0;
+        }
+        esperaBorrarHorizontal++;
+
+
+
+        if(esperaHorizontal2 > 501 && bulletHorizontalWallColision == false) {
+
+            listBulletHorizontal2.set(0,new BulletHorizontalEntity(world,7f,8f));
+
+            for (BulletHorizontalEntity bullet : listBulletHorizontal2){
+                stage.addActor(bullet);
+            }
+
+            esperaHorizontal2 = 0;
+        }
+
+        esperaHorizontal2++;
+
+
+
+        if( bulletHorizontalWallColision == true && esperaBorrarHorizontal2 > 100 ) {
+
+            if (listBulletHorizontal2.size() >= 1) {
+
+                listBulletHorizontal2.get(0).detach();
+                listBulletHorizontal2.get(0).remove();
+
+            }
+
+            bulletHorizontalWallColision = false;
+            esperaBorrarHorizontal2 = 0;
+        }
+        esperaBorrarHorizontal2++;
+
+
+
+
+       /* for (ExplosionEntity explosion : explosions) {
+            explosion.render(game.batch);
+        }*/
 
         game.batch.begin();
 
 
         //Update explosions
-        ArrayList<ExplosionEntity> explosionsToRemove = new ArrayList<ExplosionEntity>();
+        /*ArrayList<ExplosionEntity> explosionsToRemove = new ArrayList<ExplosionEntity>();
         for (ExplosionEntity explosion : explosions) {
             explosion.update(delta);
             if (explosion.remove)
                 explosionsToRemove.add(explosion);
         }
         explosions.removeAll(explosionsToRemove);
-
-
-        //Update bullets
-        /*for (BulletEntity bullet : listBullets) {
-            bullet.act(delta);
-            if (bullet.remove)
-                bulletsToRemove.add(bullet);
-        }*/
-
-        //listBullets.removeAll(bulletsToRemove);
-
-
-       /*  if(bullet1 != null && bullet2!= null) {
-
-            bullet1.act(delta);
-            bullet2.act(delta);
-            bullet1.draw(game.batch,delta);
-            bullet2.draw(game.batch,delta);
-
-            // bullet1.render(game.batch);
-            // bullet2.render(game.batch);
-
-        }
 */
+
 
         //Draw health
         if (health > 0.6f)
@@ -437,11 +655,6 @@ public class GameLevel3Screen extends BaseScreen{
         game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth() * health, 6);
         game.batch.setColor(Color.WHITE);
 
-        //Draw bullets
-        /*for (BulletEntity bullet : listBullets) {
-            bullet.render(game.batch);
-        }*/
-
 
 
         game.batch.end();
@@ -450,8 +663,8 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().update();
 
     }
 
@@ -508,7 +721,7 @@ public class GameLevel3Screen extends BaseScreen{
 
         //spikes del cuadrante final
 
-        listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 3.20f));
+        //listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 3.20f));
         listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 4.00f));
         listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 4.80f));
         listSpikes.add(new SpikeEntity(world, spikeRighTexture,57.7f, 5.60f));

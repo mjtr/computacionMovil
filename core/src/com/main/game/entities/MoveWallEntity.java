@@ -27,6 +27,8 @@ public class MoveWallEntity extends Actor {
 
     private Fixture fixture;
 
+    public boolean tocaBajar = false,tocaSubir = true;
+
     private int esperaBajar = 0;
     private int esperaSubir = 0;
 
@@ -68,19 +70,29 @@ public class MoveWallEntity extends Actor {
 
     public void act(float delta) {
 
-        if(esperaSubir == 200){
+
+        if(tocaSubir == true){
+
+            body.setLinearVelocity(0, SPEED*delta);
+        }else if(tocaBajar == true){
+
+            body.setLinearVelocity(0, -SPEED*delta);
+        }
+
+
+        /*if(esperaSubir >= 200){
             esperaSubir = 0;
             body.setLinearVelocity(0,SPEED* delta);
         }
 
-        if(esperaBajar == 401){
+        if(esperaBajar >= 401){
             esperaBajar = 0;
             body.setLinearVelocity(0,-SPEED * delta);
         }
 
         esperaSubir ++;
         esperaBajar ++;
-
+*/
     }
 
     public void detach() {

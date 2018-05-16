@@ -86,14 +86,17 @@ public class PlayerEntity extends Actor {
         if(isAlive()) {
 
 
-           // System.out.println("Player velocity = "  + body.getLinearVelocity());
+           // System.out.println("Player velocity = "  + bodyBullet.getLinearVelocity());
             acelX += Gdx.input.getAccelerometerY();
             acelY -= Gdx.input.getAccelerometerX();
 
 
             if(choqueMuro == true || spikeCollision == true ){
-                characterX = -characterX * 0.3f;
-                characterY = -characterY * 0.4f;
+               // characterX = -characterX * 0.1f;
+                //characterY = -characterY * 0.1f;
+                 characterX = characterX * 0.1f;
+                characterY = characterY * 0.1f;
+
                 choqueMuro = false;
                 spikeCollision = false;
             }
@@ -103,8 +106,6 @@ public class PlayerEntity extends Actor {
                     choqueMuroImpulso = false;
 
             }
-
-
 
             if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
                     characterX -= Gdx.graphics.getDeltaTime() * 5;
@@ -118,7 +119,7 @@ public class PlayerEntity extends Actor {
                 body.setLinearVelocity(characterX, characterY);
 
 
-               // body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+               // bodyBullet.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
 
 
         }
