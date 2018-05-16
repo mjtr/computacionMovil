@@ -57,12 +57,16 @@ public class GameLevel3Screen extends BaseScreen{
     private List<BlackHoleEntity> listHole = new ArrayList<BlackHoleEntity>();
     private ImpulseWallEntity impulseWall1 , impulseWall2;
     private PassWallEntity passWall1, passWall2, passWall3,passWall4,passWall5,passWall6,passWall7,passWall8,passWall9;
+
     private List<PassWallEntity> listPassWall = new ArrayList<PassWallEntity>();
+
     private List<ExplosionEntity> explosions = new ArrayList<ExplosionEntity>();
 
     private List<BulletEntity> listBullets = new ArrayList<BulletEntity>();
 
     private List<BulletEntity> bulletsToRemove = new ArrayList<BulletEntity>();
+
+    private List<MoveWallEntity> listMovewall = new ArrayList<MoveWallEntity>();
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
             spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture,background;
@@ -116,8 +120,15 @@ public class GameLevel3Screen extends BaseScreen{
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(2,2)));
         listHole.add(new BlackHoleEntity(world,holeTexture, new Vector2(4,3)));
 
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
+        listMovewall.add(new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f));
 
-        moveWall1 = new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f);
+        //moveWall1 = new MoveWallEntity(world, moveWallTexture , 5.50f , 28.80f);
+        //moveWall2 =
 
         world.setContactListener(new ContactListener() {
 
@@ -126,8 +137,25 @@ public class GameLevel3Screen extends BaseScreen{
 
                 if(areCollided(contact,"player", "movewall")){
 
-                      moveWall1.setOrigin(5.40f,28.80f);
+                    player.setSpikeCollision(true);
+                    if(health > 0 ){
+                        health -= 0.1f;
 
+                    }else {
+
+                        stage.addAction(
+                                Actions.sequence(
+
+                                        Actions.delay(0.5f),
+                                        Actions.run(new Runnable() {
+
+                                            public void run() {
+                                                game.setScreen(game.gameOverScreen);
+                                            }
+                                        })
+                                )
+                        );
+                    }
                 }
 
                 if(areCollided(contact,"wall" , "bullets")){
@@ -276,7 +304,12 @@ public class GameLevel3Screen extends BaseScreen{
             stage.addActor(bullet);
         }
 
-        stage.addActor(moveWall1);
+        for (MoveWallEntity movewall : listMovewall){
+
+            stage.addActor(movewall);
+        }
+
+        //stage.addActor(moveWall1);
 
 
 

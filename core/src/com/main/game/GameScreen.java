@@ -9,9 +9,12 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.main.game.entities.BlackHoleEntity;
 import com.main.game.entities.FinishEntity;
@@ -27,21 +30,37 @@ public class GameScreen extends BaseScreen {
     private Stage stage;
     private World world;
 
+    private Skin skin;
+
     private PlayerEntity player;
 
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
 
     private FinishEntity fin;
 
+    private TextButton back;
+
     private Texture playerTexture, wallTexture , finishTexture, backgroundTexture;
 
 
 
-    public GameScreen(MyGdxGame game) {
+    public GameScreen(final MyGdxGame game) {
         super(game);
 
         stage = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0),true);
+        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        back = new TextButton("Back", skin);
+
+        back.addCaptureListener(new ChangeListener() {
+
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.menuScreen);
+            }
+        });
+        back.setSize(40, 20);
+        back.setPosition(10, 340);
+        stage.addActor(back);
     }
 
     public void show() {

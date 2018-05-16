@@ -15,10 +15,9 @@ public class SelectLevel extends BaseScreen{
     private Stage stage;
     private Skin skin;
     // private Image logo;
-    private TextButton level1;
-    private TextButton level2;
-    private TextButton level3;
-    private Texture background, button1, button2, button3;
+    private TextButton level1, level2, level3, back;
+
+    private Texture background;
 
     public SelectLevel(final MyGdxGame game) {
         super(game);
@@ -29,12 +28,18 @@ public class SelectLevel extends BaseScreen{
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
         background = game.getManager().get("Select.png");
-        button1 = game.getManager().get("background4.png");
-        button2 = game.getManager().get("background.png");
-        button3 = game.getManager().get("water.jpg");
+
         level1 = new TextButton("1", skin);
         level2 = new TextButton("2", skin);
         level3 = new TextButton("3", skin);
+        back = new TextButton("Back", skin);
+
+        back.addCaptureListener(new ChangeListener() {
+
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.menuScreen);
+            }
+        });
 
         level1.addCaptureListener(new ChangeListener() {
 
@@ -57,13 +62,16 @@ public class SelectLevel extends BaseScreen{
         level1.setSize(200,80);
         level2.setSize(200, 80);
         level3.setSize(200, 80);
+        back.setSize(40, 20);
         level1.setPosition(220, 140);
         level2.setPosition(40, 40);
         level3.setPosition(400, 40);
+        back.setPosition(10, 340);
 
         stage.addActor(level1);
         stage.addActor(level2);
         stage.addActor(level3);
+        stage.addActor(back);
     }
 
 
