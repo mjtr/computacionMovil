@@ -15,7 +15,7 @@ public class MyGdxGame extends Game {
 
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
-			,gameLevel3Screen, selectLevel, ranking;
+			,gameLevel3Screen, selectLevel, ranking, login;
 
 
 	public AssetManager getManager() {
@@ -76,7 +76,7 @@ public class MyGdxGame extends Game {
 
 
 		manager.finishLoading();
- 		setScreen(new LoadingScreen(this));
+ 		setScreen(new LogIn(this));
 	}
 
 	public void finishLoading() {
@@ -89,6 +89,7 @@ public class MyGdxGame extends Game {
 		endLevel2Screen = new EndLevel2Screen(this);
 		selectLevel = new SelectLevel(this);
 		ranking = new Ranking(this);
+		login = new LogIn(this);
 
 		setScreen(menuScreen);
 	}
