@@ -2,6 +2,8 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -52,7 +54,10 @@ public class Ranking extends BaseScreen{
 
     public void render(float delta) {
         //Gdx.gl.glClearColor(0.7f, 0.3f, 0.5f, 1f);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+            game.setScreen(game.menuScreen);
+        }
         stage.getBatch().begin();
         stage.getBatch().draw(background,0, 0,640,360);
         stage.getBatch().end();
