@@ -59,13 +59,13 @@ public class GameLevel3Screen extends BaseScreen{
     private boolean bulletColision = false;
     private boolean bulletHorizontalColision = false;
 
-<<<<<<< HEAD
+
     private Sound golpe, hole, laser;
 
     private int esperaMuro = 0;
-=======
+
     private boolean bulletHorizontalWallColision = false;
->>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
+
 
     private float stat;
 
@@ -95,13 +95,13 @@ public class GameLevel3Screen extends BaseScreen{
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
             spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture, turretTexture ;
 
-<<<<<<< HEAD
+
     private Music fondo;
 
-=======
+
     //Textura para la vida
     private Texture blank;
->>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
+
 
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
@@ -109,14 +109,14 @@ public class GameLevel3Screen extends BaseScreen{
         world = new World(new Vector2(0,0), true);
 
         position = new Vector3(stage.getCamera().position);
-<<<<<<< HEAD
+
         fondo = game.getManager().get("Fondo.mp3");
         golpe = game.getManager().get("Golpe.mp3");
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1.mp3");
-=======
+
         fondo = new Sprite(new Texture("water.jpg"));
->>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
+
 
     }
 
@@ -134,15 +134,15 @@ public class GameLevel3Screen extends BaseScreen{
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
-<<<<<<< HEAD
+
         moveWallTexture = game.getManager().get("circleSpikes4.png");
         golpe = game.getManager().get("Golpe.mp3");
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1");
-=======
+
         moveWallTexture = game.getManager().get("CircleGordo2.png");
         turretTexture = game.getManager().get("turret2.png");
->>>>>>> aa8f10e9b2236e1c3030a2e1973a67e7b32cd31b
+
 
         blank = new Texture("blank.png");
 
