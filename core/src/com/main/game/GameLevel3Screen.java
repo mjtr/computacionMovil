@@ -118,8 +118,8 @@ public class GameLevel3Screen extends BaseScreen{
 
         health = 1f;
 
-        //camera = new OrthographicCamera();
-        //camera.setToOrtho(true, 1280, 1240);
+        camera = new OrthographicCamera();
+        camera.setToOrtho(true, 1280, 1240);
 
         finish = new FinishEntity(world,finishTexture,new Vector2(57.0f,33.3f));
 
@@ -422,9 +422,9 @@ public class GameLevel3Screen extends BaseScreen{
 
         System.out.println("Número de muros totales hasta ahora: " + listWall.size());
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().position.set(position);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().position.set(position);
+        stage.getCamera().update();
     }
 
     public void hide() {
@@ -483,17 +483,6 @@ public class GameLevel3Screen extends BaseScreen{
 
 
             }
-         /*  if(listMovewall.get(0).tocaBajar == true){
-
-               listMovewall.get(0).tocaBajar = false;
-               listMovewall.get(0).tocaSubir = true;
-
-           }else if (listMovewall.get(0).tocaSubir == true){
-
-               listMovewall.get(0).tocaBajar = true;
-               listMovewall.get(0).tocaSubir = false;
-
-           }*/
 
             esperaChocaMoveWall = 0;
 
@@ -642,8 +631,8 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-        //stage.getCamera().position.set(player.getX(),player.getY(),0);
-        //stage.getCamera().update();
+        stage.getCamera().position.set(player.getX(),player.getY(),0);
+        stage.getCamera().update();
 
     }
 
