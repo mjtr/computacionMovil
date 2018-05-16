@@ -23,6 +23,7 @@ public class LoadingScreen extends BaseScreen {
 
     public LoadingScreen(MyGdxGame game) {
         super(game);
+        game.setUser("caca");
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
@@ -36,6 +37,7 @@ public class LoadingScreen extends BaseScreen {
 
 
 
+
     public void render(float delta) {
         //Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -44,6 +46,7 @@ public class LoadingScreen extends BaseScreen {
         imagen.setSize(640,360);
         imagen.setPosition(0,0);
         imagen.draw(game.batch);
+
         game.batch.end();
         if (game.getManager().update()) {
             game.finishLoading();
@@ -52,6 +55,8 @@ public class LoadingScreen extends BaseScreen {
             int progress = (int) (game.getManager().getProgress() * 100);
             loading.setText("Loading... " + progress + "%");
         }
+
+
 
 
         stage.act();

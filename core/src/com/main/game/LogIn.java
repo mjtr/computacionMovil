@@ -2,6 +2,7 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,10 +13,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import static com.badlogic.gdx.Input.Keys.ENTER;
 
 public class LogIn extends BaseScreen{
 
@@ -27,6 +31,7 @@ public class LogIn extends BaseScreen{
     private Texture background;
     private SpriteBatch batch;
     private BitmapFont font;
+    private String user, pass;
 
 
     public LogIn(final MyGdxGame game) {
@@ -43,10 +48,21 @@ public class LogIn extends BaseScreen{
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         stage = new Stage(new FitViewport(640, 360));
-
+        //username.addCaptureListener(TextArea.TextAreaListener)
         background = game.getManager().get("Menu.png");
+
+        username.setTextFieldListener(new TextField.TextFieldListener() {
+            @Override
+            public void keyTyped(TextField textField, char c) {
+                if((c == '\r' || c == '\n')){
+                    textField.next(Gdx.input.isKeyPressed(ENTER));
+                }
+            }
+        });
+        //game.setUser(username);
         stage.addActor(username);
         stage.addActor(password);
+
 
     }
 
@@ -85,8 +101,9 @@ public class LogIn extends BaseScreen{
         stage.act();
         stage.draw();
         batch.begin();
-        font.draw(batch, "Username:", 110, 270);
+        font.draw(batch,"User", 110, 270);
         font.draw(batch, "Password:", 110, 180);
         batch.end();
+
     }
 }
