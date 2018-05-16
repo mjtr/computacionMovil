@@ -44,7 +44,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     private float health;
 
-    private Sprite fondo;
+    //private Sprite fondo;
 
     private PlayerEntity player;
 
@@ -115,7 +115,7 @@ public class GameLevel3Screen extends BaseScreen{
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1.mp3");
 
-        fondo = new Sprite(new Texture("water.jpg"));
+        //fondo = new Sprite(new Texture("water.jpg"));
 
 
     }
@@ -138,7 +138,7 @@ public class GameLevel3Screen extends BaseScreen{
         moveWallTexture = game.getManager().get("circleSpikes4.png");
         golpe = game.getManager().get("Golpe.mp3");
         hole = game.getManager().get("Hole1.mp3");
-        laser = game.getManager().get("Laser1");
+        laser = game.getManager().get("Laser1.mp3");
 
         moveWallTexture = game.getManager().get("CircleGordo2.png");
         turretTexture = game.getManager().get("turret2.png");
@@ -487,8 +487,8 @@ public class GameLevel3Screen extends BaseScreen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        fondo.draw(game.batch);
+        //fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //fondo.draw(game.batch);
         game.batch.end();
 
         stage.act();

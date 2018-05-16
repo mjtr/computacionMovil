@@ -91,7 +91,7 @@ public class MyGdxGame extends Game {
 		manager.load("Golpe.mp3", Sound.class);
 		manager.load("GameOver.mp3", Sound.class);
 		manager.load("Hole1.mp3", Sound.class);
-		manager.load("Lase1.mp3", Sound.class);
+		manager.load("Laser1.mp3", Sound.class);
 
 
 
