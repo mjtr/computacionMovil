@@ -26,8 +26,6 @@ public class MenuScreen extends BaseScreen{
     public MenuScreen(final MyGdxGame game) {
         super(game);
 
-
-
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         play = new TextButton("Play", skin);

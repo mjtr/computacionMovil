@@ -5,6 +5,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.List;
+
 public class MyGdxGame extends Game {
 
 
@@ -13,6 +15,15 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	private String user;
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
 			,gameLevel3Screen, selectLevel, ranking, login;
@@ -65,6 +76,7 @@ public class MyGdxGame extends Game {
 		manager.load("circleSpikes3.jpg",Texture.class);
 		manager.load("circleSpikes4.png",Texture.class);
 		manager.load("GameOver.png",Texture.class);
+		manager.load("PantallaCarga.jpg", Texture.class);
 
 
 
@@ -74,17 +86,17 @@ public class MyGdxGame extends Game {
 
 
 
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
+		//loadingScreen = new LoadingScreen(this);
+		//setScreen(loadingScreen);
 
 
 		//manager.finishLoading();
 
-		//manager.finishLoading();
+		manager.finishLoading();
 
 	//	manager.finishLoading();
 
- 		//setScreen(new GameLevel3Screen(this));
+ 		setScreen(new LogIn(this));
 
  		//setScreen(new LoadingScreen(this));
 	}

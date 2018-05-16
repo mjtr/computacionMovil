@@ -3,6 +3,7 @@ package com.main.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -14,6 +15,8 @@ public class EndLevel2Screen extends BaseScreen{
 
     private Stage stage;
 
+    private Texture background;
+
     private Skin skin;
 
     private TextButton nextLevel, menu;
@@ -22,6 +25,8 @@ public class EndLevel2Screen extends BaseScreen{
         super(game);
 
         stage = new Stage(new FitViewport(640, 360));
+
+        background = game.getManager().get("PantallaCarga.jpg");
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
@@ -58,6 +63,7 @@ public class EndLevel2Screen extends BaseScreen{
     public void show() {
 
         Gdx.input.setInputProcessor(stage);
+        background = game.getManager().get("PantallaCarga.jpg");
     }
 
 
@@ -76,6 +82,9 @@ public class EndLevel2Screen extends BaseScreen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0.4f, 0.5f, 0.8f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getBatch().begin();
+        stage.getBatch().draw(background,0, 0,640,360);
+        stage.getBatch().end();
         stage.act();
         stage.draw();
     }

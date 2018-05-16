@@ -51,7 +51,6 @@ public class GameScreen extends BaseScreen {
         world = new World(new Vector2(0,0),true);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         back = new TextButton("Back", skin);
-
         back.addCaptureListener(new ChangeListener() {
 
             public void changed(ChangeEvent event, Actor actor) {
@@ -60,7 +59,9 @@ public class GameScreen extends BaseScreen {
         });
         back.setSize(40, 20);
         back.setPosition(10, 340);
-        stage.addActor(back);
+
+
+
     }
 
     public void show() {
@@ -79,6 +80,9 @@ public class GameScreen extends BaseScreen {
         world.setContactListener(new ContactListener() {
 
             public void beginContact(Contact contact) {
+
+
+
             if(areCollided(contact,"player" , "finish")){
                 stage.addAction(
                         Actions.sequence(
@@ -140,6 +144,8 @@ public class GameScreen extends BaseScreen {
             stage.addActor(wall);
         }
 
+        stage.addActor(back);
+
 
     }
 
@@ -159,6 +165,8 @@ public class GameScreen extends BaseScreen {
 
         Gdx.gl.glClearColor(0.8f,0.5f,0.5f,1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
 
         stage.getBatch().begin();
         stage.getBatch().draw(backgroundTexture,0, 0,640,360);
