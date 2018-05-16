@@ -57,6 +57,8 @@ public class MyGdxGame extends Game {
 		manager.load("ranking.png", Texture.class);
 		manager.load("blank.png",Texture.class);
 		manager.load("bullet.png",Texture.class);
+		manager.load("bullet2.png",Texture.class);
+		manager.load("bullet3.png",Texture.class);
 		manager.load("explosion.png",Texture.class);
 		manager.load("explosion1.png",Texture.class);
 		manager.load("explosion2.png",Texture.class);
@@ -64,16 +66,20 @@ public class MyGdxGame extends Game {
 		manager.load("circleSpikes2.png",Texture.class);
 		manager.load("circleSpikes3.jpg",Texture.class);
 		manager.load("circleSpikes4.png",Texture.class);
+		manager.load("circleGordo1.png",Texture.class);
+		manager.load("CircleGordo2.png",Texture.class);
 		manager.load("GameOver.png",Texture.class);
+		manager.load("turret2.png",Texture.class);
 
 
 
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
+
+		//loadingScreen = new LoadingScreen(this);
+		//setScreen(loadingScreen);
 
 
-	//	manager.finishLoading();
- 		//setScreen(new GameLevel3Screen(this));
+		manager.finishLoading();
+ 		setScreen(new GameLevel3Screen(this));
  		//setScreen(new LoadingScreen(this));
 	}
 
