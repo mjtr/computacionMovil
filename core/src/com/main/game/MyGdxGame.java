@@ -2,6 +2,8 @@ package com.main.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -27,6 +29,8 @@ public class MyGdxGame extends Game {
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
 			,gameLevel3Screen, selectLevel, ranking, login;
+
+
 
 
 	public AssetManager getManager() {
@@ -78,7 +82,11 @@ public class MyGdxGame extends Game {
 		manager.load("GameOver.png",Texture.class);
 		manager.load("PantallaCarga.jpg", Texture.class);
 		manager.load("Cargas.png", Texture.class);
-
+		manager.load("Fondo.mp3", Music.class);
+		manager.load("Golpe.mp3", Sound.class);
+		manager.load("GameOver.mp3", Sound.class);
+		manager.load("Hole1.mp3", Sound.class);
+		manager.load("Lase1.mp3", Sound.class);
 
 
 		loadingScreen = new LoadingScreen(this);

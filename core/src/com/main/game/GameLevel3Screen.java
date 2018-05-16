@@ -2,6 +2,8 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -48,6 +50,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private int espera = 0;
 
+    private Sound golpe, hole, laser;
+
     private int esperaMuro = 0;
 
     private float stat;
@@ -78,6 +82,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private MoveWallEntity moveWall1;
 
+    private Music fondo;
+
 
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
@@ -85,10 +91,17 @@ public class GameLevel3Screen extends BaseScreen{
         world = new World(new Vector2(0,0), true);
 
         position = new Vector3(stage.getCamera().position);
+        fondo = game.getManager().get("Fondo.mp3");
+        golpe = game.getManager().get("Golpe.mp3");
+        hole = game.getManager().get("Hole1.mp3");
+        laser = game.getManager().get("Laser1.mp3");
 
     }
 
     public void show() {
+
+        fondo.setVolume(0.75f);
+        fondo.play();
 
         playerTexture = game.getManager().get("ball.png");
         finishTexture = game.getManager().get("finish2.png");
@@ -101,6 +114,9 @@ public class GameLevel3Screen extends BaseScreen{
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
         moveWallTexture = game.getManager().get("circleSpikes4.png");
+        golpe = game.getManager().get("Golpe.mp3");
+        hole = game.getManager().get("Hole1.mp3");
+        laser = game.getManager().get("Laser1");
 
         blank = new Texture("blank.png");
 
@@ -171,6 +187,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                     if(health > 0 ){
                         health -= 0.1f;
+                        golpe.play();
 
                     }else {
 
@@ -206,7 +223,7 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact,"player","hole")){
-
+                    hole.play();
                     player.setAlive(false);
 
                     stage.addAction(
@@ -246,6 +263,7 @@ public class GameLevel3Screen extends BaseScreen{
                     player.setChoqueMuro(true);
 
                 }
+
 
             }
 
