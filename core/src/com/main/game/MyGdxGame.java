@@ -96,7 +96,7 @@ public class MyGdxGame extends Game {
 
 	//	manager.finishLoading();
 
- 		setScreen(new LogIn(this));
+ 		setScreen(new LoadingScreen(this));
 
  		//setScreen(new LoadingScreen(this));
 	}
@@ -113,10 +113,11 @@ public class MyGdxGame extends Game {
 		ranking = new Ranking(this);
 		login = new LogIn(this);
 
-		setScreen(menuScreen);
+		setScreen(login);
 	}
 
 	public void render() {
+
 		super.render();
 	}
 }
