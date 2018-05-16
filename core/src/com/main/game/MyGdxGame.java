@@ -71,12 +71,12 @@ public class MyGdxGame extends Game {
 
 
 
-		//loadingScreen = new LoadingScreen(this);
-		//setScreen(loadingScreen);
+		loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
 
 
-		manager.finishLoading();
- 		setScreen(new LoadingScreen(this));
+		//manager.finishLoading();
+ 		//setScreen(new LoadingScreen(this));
 	}
 
 	public void finishLoading() {
