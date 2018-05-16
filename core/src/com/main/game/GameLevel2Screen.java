@@ -4,6 +4,7 @@ package com.main.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -37,6 +38,7 @@ public class GameLevel2Screen extends BaseScreen {
 
     private BlackHoleEntity hole, hole2;
     private Music fondo;
+    private Sound hole1;
 
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, backgroundTexture;
 
@@ -47,6 +49,7 @@ public class GameLevel2Screen extends BaseScreen {
         stage  = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0), true);
         fondo = game.getManager().get("Fondo.mp3");
+        hole1 = game.getManager().get("Hole1.mp3");
 
     }
 
@@ -77,7 +80,9 @@ public class GameLevel2Screen extends BaseScreen {
 
             public void beginContact(Contact contact) {
                 if(areCollided(contact,"player" , "finish")){
+                    fondo.stop();
                     stage.addAction(
+
                             Actions.sequence(
                                     Actions.delay(0.5f),
                                     Actions.run(new Runnable() {
@@ -93,7 +98,8 @@ public class GameLevel2Screen extends BaseScreen {
 
                 if(areCollided(contact,"player","hole")){
                     player.setAlive(false);
-
+                    hole1.play();
+                    fondo.stop();
                     stage.addAction(
                             Actions.sequence(
                                     Actions.delay(1f),

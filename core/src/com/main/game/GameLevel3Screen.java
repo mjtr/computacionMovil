@@ -189,7 +189,7 @@ public class GameLevel3Screen extends BaseScreen{
             public void beginContact(Contact contact) {
 
                 if(areCollided(contact, "player" , "bullets")){
-
+                    laser.play();
                     System.out.println("jugador y bala han colisionado");
                     bulletColision = true;
 
@@ -229,6 +229,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                     if(health > 0 ){
                         health -= 0.1f;
+                        laser.play();
 
                     }else {
 
@@ -312,7 +313,7 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact,"player" , "finish")){
-
+                    fondo.stop();
                     stage.addAction(
                             Actions.sequence(
                                     Actions.delay(0.5f),
@@ -329,6 +330,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                 if(areCollided(contact,"player","hole")){
                     hole.play();
+                    fondo.stop();
                     player.setAlive(false);
 
                     stage.addAction(

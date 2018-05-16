@@ -86,7 +86,9 @@ public class GameScreen extends BaseScreen {
 
 
             if(areCollided(contact,"player" , "finish")){
+                fondo.stop();
                 stage.addAction(
+
                         Actions.sequence(
                                 Actions.delay(1.5f),
                                 Actions.run(new Runnable() {
