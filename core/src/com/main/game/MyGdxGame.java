@@ -77,6 +77,7 @@ public class MyGdxGame extends Game {
 		manager.load("circleSpikes4.png",Texture.class);
 		manager.load("GameOver.png",Texture.class);
 		manager.load("PantallaCarga.jpg", Texture.class);
+		manager.load("Cargas.png", Texture.class);
 
 
 

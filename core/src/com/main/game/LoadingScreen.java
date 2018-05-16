@@ -27,7 +27,7 @@ public class LoadingScreen extends BaseScreen {
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        carga = new Texture("PantallaCarga.jpg");
+        carga = new Texture("Cargas.png");
         imagen = new Sprite(carga);
         loading = new Label("Loading...", skin);
         loading.setPosition(320 - loading.getWidth() / 2, 180 - loading.getHeight() / 2);

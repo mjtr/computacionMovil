@@ -28,7 +28,7 @@ public class EndLevelScreen extends BaseScreen {
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
-        background = game.getManager().get("PantallaCarga.jpg");
+        background = game.getManager().get("Cargas.png");
 
         nextLevel = new TextButton("NextLevel", skin);
         menu = new TextButton("Menu", skin);
@@ -63,7 +63,7 @@ public class EndLevelScreen extends BaseScreen {
     public void show() {
 
         Gdx.input.setInputProcessor(stage);
-        background = game.getManager().get("PantallaCarga.jpg");
+        background = game.getManager().get("Cargas.png");
     }
 
 
@@ -84,6 +84,8 @@ public class EndLevelScreen extends BaseScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.getBatch().begin();
         stage.getBatch().draw(background,0, 0,640,360);
+        //stage.getBatch().draw(background,0, 0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+
         stage.getBatch().end();
         stage.act();
         stage.draw();
