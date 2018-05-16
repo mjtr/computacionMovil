@@ -118,12 +118,6 @@ public class PlayerEntity extends Actor {
                 body.setLinearVelocity(characterX, characterY);
 
 
-/*
-                if(choqueMuro == true && acelY != 0 && acelX !=0){
-                    acelY = 0;
-                    acelX = 0;
-                }
-*/
                // body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
 
 
