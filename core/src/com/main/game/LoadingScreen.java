@@ -14,7 +14,7 @@ public class LoadingScreen extends BaseScreen {
     private Stage stage;
     private Skin skin;
     private Label loading;
-    private Texture background;
+
 
 
     public LoadingScreen(MyGdxGame game) {
@@ -42,9 +42,7 @@ public class LoadingScreen extends BaseScreen {
             loading.setText("Loading... " + progress + "%");
         }
 
-        stage.getBatch().begin();
-        stage.getBatch().draw(background,0, 0,640,360);
-        stage.getBatch().end();
+
         stage.act();
         stage.draw();
     }
