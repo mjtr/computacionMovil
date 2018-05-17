@@ -33,7 +33,17 @@ import com.main.game.entities.TurretEntity;
 import com.main.game.entities.WallEntity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.Timer;
+import java.util.TreeMap;
 
 public class GameLevel3Screen extends BaseScreen{
 
@@ -69,6 +79,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private float stat;
 
+
+
     private int esperaChocaMoveWall = 1;
 
     private List<WallEntity> listWall = new ArrayList<WallEntity>();
@@ -98,6 +110,8 @@ public class GameLevel3Screen extends BaseScreen{
 
     private Music fondo;
 
+    private Integer crono;
+
 
     //Textura para la vida
     private Texture blank;
@@ -105,6 +119,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
+
         stage  = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0), true);
 
@@ -115,13 +130,15 @@ public class GameLevel3Screen extends BaseScreen{
         hole = game.getManager().get("Hole1.mp3");
         laser = game.getManager().get("Laser1.mp3");
 
+
+
         //fondo = new Sprite(new Texture("water.jpg"));
 
 
     }
 
     public void show() {
-
+        crono = 0;
         fondo.setVolume(0.75f);
         fondo.play();
 
@@ -493,6 +510,9 @@ public class GameLevel3Screen extends BaseScreen{
         //fondo.draw(game.batch);
         game.batch.end();
 
+        crono++;
+        game.setCrono(crono);
+
         stage.act();
         world.step(delta,6,2);
         stat = delta;
@@ -684,6 +704,8 @@ public class GameLevel3Screen extends BaseScreen{
                 || userDataA.equals(userB) && userDataB.equals(userA) );
 
     }
+
+
 
 
 

@@ -17,6 +17,16 @@ public class MyGdxGame extends Game {
 
 	public SpriteBatch batch;
 
+	public Integer getCrono() {
+		return crono;
+	}
+
+	public void setCrono(Integer crono) {
+		this.crono = crono;
+	}
+
+	private Integer crono;
+
 	public String getUser() {
 		return user;
 	}
@@ -29,6 +39,7 @@ public class MyGdxGame extends Game {
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
 			,gameLevel3Screen, selectLevel, ranking, login;
+
 
 
 
