@@ -52,6 +52,7 @@ public class GameScreen extends BaseScreen {
         world = new World(new Vector2(0,0),true);
         fondo = game.getManager().get("Fondo.mp3");
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
         back = new TextButton("Back", skin);
         back.addCaptureListener(new ChangeListener() {
 
@@ -150,7 +151,7 @@ public class GameScreen extends BaseScreen {
         }
 
         // Gdx.input.setInputProcessor(stage);
-        stage.addActor(back);
+       // stage.addActor(back);
         fondo.setVolume(0.75f);
         fondo.play();
 

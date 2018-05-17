@@ -21,7 +21,7 @@ public class PlayerEntity extends Actor {
 
     private float acelX, acelY ,speedx, zAngle , speedy;
 
-    //private boolean hayAcel = true;
+    private boolean hayAcel = true;
 
     float characterX,characterY;
 
@@ -52,7 +52,7 @@ public class PlayerEntity extends Actor {
 
         this.world = world;
         this.texture = texture;
-        //hayAcel = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
+        hayAcel = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 
         BodyDef def = new BodyDef();
 
@@ -90,24 +90,25 @@ public class PlayerEntity extends Actor {
             acelX += Gdx.input.getAccelerometerY();
             acelY -= Gdx.input.getAccelerometerX();
 
+            if(!hayAcel) {
+                if (choqueMuro == true || spikeCollision == true) {
+                    characterX = -characterX * 0.4f;
+                    characterY = -characterY * 0.4f;
 
-            if(choqueMuro == true || spikeCollision == true ){
-               // characterX = -characterX * 0.1f;
-                //characterY = -characterY * 0.1f;
-                 characterX = characterX * 0.1f;
-                characterY = characterY * 0.1f;
+                    //characterX = characterX * 0.1f;
+                    //characterY = characterY * 0.1f;
 
-                choqueMuro = false;
-                spikeCollision = false;
-            }
+                    choqueMuro = false;
+                    spikeCollision = false;
+                }
 
-            if(choqueMuroImpulso == true){
+                if (choqueMuroImpulso == true) {
                     characterX = -characterX * 2.5f;
                     choqueMuroImpulso = false;
 
-            }
+                }
 
-            if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
+                if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))
                     characterX -= Gdx.graphics.getDeltaTime() * 5;
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT))
                     characterX += Gdx.graphics.getDeltaTime() * 5;
@@ -119,7 +120,27 @@ public class PlayerEntity extends Actor {
                 body.setLinearVelocity(characterX, characterY);
 
 
-               // bodyBullet.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+            }else{
+
+                if (choqueMuro == true || spikeCollision == true) {
+
+                    acelX = -acelX * 0.4f;
+                    acelY = -acelY * 0.4f;
+                    choqueMuro = false;
+                    spikeCollision = false;
+
+                }
+
+                if (choqueMuroImpulso == true) {
+                    acelX = -acelX * 2.5f;
+                    choqueMuroImpulso = false;
+
+                }
+
+                body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+
+            }
+
 
 
         }
