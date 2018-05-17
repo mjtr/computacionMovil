@@ -54,7 +54,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     private float health;
 
-    //private Sprite fondo;
+    private Sprite background;
 
     private PlayerEntity player;
 
@@ -132,7 +132,7 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-        //fondo = new Sprite(new Texture("water.jpg"));
+        background = new Sprite(new Texture("water.jpg"));
 
 
     }
@@ -506,8 +506,8 @@ public class GameLevel3Screen extends BaseScreen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        //fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //fondo.draw(game.batch);
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        background.draw(game.batch);
         game.batch.end();
 
         crono++;
