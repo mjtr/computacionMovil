@@ -60,6 +60,7 @@ public class GameScreen extends BaseScreen {
         back.setSize(40, 20);
         back.setPosition(10, 340);
 
+        //stage.addActor(back);
 
 
     }
@@ -144,14 +145,14 @@ public class GameScreen extends BaseScreen {
             stage.addActor(wall);
         }
 
-        stage.addActor(back);
-
+        // Gdx.input.setInputProcessor(stage);
 
     }
 
     public void hide() {
         player.detach();
         player.remove();
+       // Gdx.input.setInputProcessor(null);
 
         /*for (WallEntity wall : listWall){
             wall.detach();

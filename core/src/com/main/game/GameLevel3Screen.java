@@ -107,7 +107,7 @@ public class GameLevel3Screen extends BaseScreen{
         wallTexture = game.getManager().get("wallYellow.png");
         holeTexture = game.getManager().get("holepeq.png");
         impulseWallTexture = game.getManager().get("wallblue.png");
-        destroyWallTexture = game.getManager().get("whitewall.png");
+        destroyWallTexture = game.getManager().get("wallYellow.png");
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
@@ -288,7 +288,7 @@ public class GameLevel3Screen extends BaseScreen{
                                     Actions.run(new Runnable() {
 
                                         public void run() {
-                                            game.setScreen(game.endLevelScreen);
+                                            game.setScreen(game.menuScreen);
                                         }
                                     })
                             )
@@ -620,7 +620,7 @@ public class GameLevel3Screen extends BaseScreen{
         else
             game.batch.setColor(Color.RED);
 
-        game.batch.draw(blank, 0, -2, Gdx.graphics.getWidth() * health, 6);
+        game.batch.draw(blank, 0, 0, Gdx.graphics.getWidth() * health, 14);
         game.batch.setColor(Color.WHITE);
 
 
@@ -631,7 +631,7 @@ public class GameLevel3Screen extends BaseScreen{
 
 
 
-        stage.getCamera().position.set(player.getX(),player.getY(),0);
+       stage.getCamera().position.set(player.getX(),player.getY(),0);
         stage.getCamera().update();
 
     }
