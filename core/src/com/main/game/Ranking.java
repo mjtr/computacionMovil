@@ -73,19 +73,19 @@ public class Ranking extends BaseScreen{
         background = game.getManager().get("ranking.png");
 
 
-        first = new Label("1º PLACE: "+pref.getString("1","Pepe"), skin);
+        first = new Label("1º PLACE: "+pref.getString("1","Pepe    Time: 62"), skin);
         first.setPosition(320 - first.getWidth() / 2, 208 - first.getHeight() / 2);
         stage.addActor(first);
 
-        second = new Label("2º PLACE: "+pref.getString("2","Alba"), skin);
+        second = new Label("2º PLACE: "+pref.getString("2","Alba    Time: 68"), skin);
         second.setPosition(320 - second.getWidth() / 2, 168 - second.getHeight() / 2);
         stage.addActor(second);
 
-        third = new Label("3º PLACE: "+pref.getString("3", "Marta"), skin);
+        third = new Label("3º PLACE: "+pref.getString("3", "Marta    Time: 70"), skin);
         third.setPosition(320 - third.getWidth() / 2, 128 - third.getHeight() / 2);
         stage.addActor(third);
 
-        fourth = new Label("4º PLACE: "+pref.getString("4", "Manu"), skin);
+        fourth = new Label("4º PLACE: "+pref.getString("4", "Manu    Time: 71"), skin);
         fourth.setPosition(320 - fourth.getWidth() / 2, 88 - fourth.getHeight() / 2);
         stage.addActor(fourth);
 
