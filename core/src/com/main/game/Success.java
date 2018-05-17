@@ -26,74 +26,41 @@ import java.awt.event.TextListener;
 
 import static com.badlogic.gdx.Input.Keys.ENTER;
 
-public class LogIn extends BaseScreen {
+public class Success extends BaseScreen {
 
     private Stage stage;
     private Skin skin;
     // private Image logo;
-    private TextField username, password;
-    private TextButton register;
     private Texture background;
     private SpriteBatch batch;
     private BitmapFont font;
-    private String user, pass;
-    private TextButton enter;
+    private TextButton back;
 
-
-    public LogIn(final MyGdxGame game) {
+    public Success(final MyGdxGame game) {
         super(game);
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        username = new TextField("", skin);
-        password = new TextField("", skin);
-        password.setPasswordCharacter('*');
-        password.setPasswordMode(true);
-        enter = new TextButton("Intro", skin);
-        register = new TextButton("Register", skin);
-        username.setSize(400,50);
-        username.setPosition(110, 140);
-        password.setSize(400,50);
-        password.setPosition(110, 70);
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLACK);
-        user = username.getText();
-        game.setUser(user);
-
-
+        back = new TextButton("Back", skin);
 
 
         stage = new Stage(new FitViewport(640, 360));
 
         background = game.getManager().get("Menu.png");
 
-
-        enter.addCaptureListener(new ChangeListener() {
+        back.addCaptureListener(new ChangeListener() {
 
             public void changed(ChangeEvent event, Actor actor) {
-
-                game.setScreen(game.menuScreen);
+                game.setScreen(game.login);
             }
         });
 
-        register.addCaptureListener(new ChangeListener() {
+        back.setSize(40, 20);
+        back.setPosition(10, 340);
 
-            public void changed(ChangeEvent event, Actor actor) {
-
-                game.setScreen(game.register);
-            }
-        });
-
-        enter.setSize(100, 40);
-        enter.setPosition(260, 20);
-        register.setSize(100,40);
-        register.setPosition(520,20);
-
-        stage.addActor(username);
-        stage.addActor(password);
-        stage.addActor(enter);
-        stage.addActor(register);
-
+        stage.addActor(back);
 
     }
 
@@ -128,11 +95,8 @@ public class LogIn extends BaseScreen {
         stage.getBatch().end();
         //Gdx.gl.glClearColor(1,1,1,1);
         //Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-        user = username.getText();
-        game.setUser(user);
         batch.begin();
-        font.draw(batch,"User", 110, 270);
-        font.draw(batch, "Password", 110, 180);
+        font.draw(batch,"¡Registro Realizado con éxito!", 220, 238);
         batch.end();
         stage.act();
         stage.draw();

@@ -2,8 +2,11 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,6 +24,8 @@ public class MenuScreen extends BaseScreen{
     private TextButton selectLevel;
     private TextButton ranking;
     private Texture background;
+    private SpriteBatch batch;
+    private BitmapFont font;
 
 
     public MenuScreen(final MyGdxGame game) {
@@ -32,7 +37,9 @@ public class MenuScreen extends BaseScreen{
         background = game.getManager().get("Menu.png");
         selectLevel = new TextButton("Select Level", skin);
         ranking = new TextButton("Ranking", skin);
-
+        batch=new SpriteBatch();
+        font=new BitmapFont();
+        font.setColor(Color.BLACK);
         play.addCaptureListener(new ChangeListener() {
 
             public void changed(ChangeEvent event, Actor actor) {
@@ -79,6 +86,8 @@ public class MenuScreen extends BaseScreen{
 
         stage.dispose();
         skin.dispose();
+        batch.dispose();
+        font.dispose();
     }
 
 
@@ -88,6 +97,9 @@ public class MenuScreen extends BaseScreen{
         stage.getBatch().begin();
         stage.getBatch().draw(background,0, 0,640,360);
         stage.getBatch().end();
+        batch.begin();
+        font.draw(batch,"Bienvenido "+ game.getUser(), 250, 318);
+        batch.end();
         stage.act();
         stage.draw();
 

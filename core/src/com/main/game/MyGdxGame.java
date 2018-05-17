@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sun.net.httpserver.Authenticator;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class MyGdxGame extends Game {
 	private String user;
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
-			,gameLevel3Screen, selectLevel, ranking, login;
+			,gameLevel3Screen, selectLevel, ranking, login, register, success;
 
 
 
@@ -127,7 +128,8 @@ public class MyGdxGame extends Game {
 		selectLevel = new SelectLevel(this);
 		ranking = new Ranking(this);
 		login = new LogIn(this);
-
+		register = new Register(this);
+        success = new Success(this);
 		setScreen(login);
 	}
 
