@@ -26,21 +26,19 @@ import java.awt.event.TextListener;
 
 import static com.badlogic.gdx.Input.Keys.ENTER;
 
-public class LogIn extends BaseScreen {
+public class Register extends BaseScreen {
 
     private Stage stage;
     private Skin skin;
     // private Image logo;
-    private TextField username, password;
-    private TextButton register;
+    private TextField username, password, confirm;
     private Texture background;
     private SpriteBatch batch;
     private BitmapFont font;
     private String user, pass;
-    private TextButton enter;
+    private TextButton enter, back;
 
-
-    public LogIn(final MyGdxGame game) {
+    public Register(final MyGdxGame game) {
         super(game);
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
@@ -48,19 +46,22 @@ public class LogIn extends BaseScreen {
         password = new TextField("", skin);
         password.setPasswordCharacter('*');
         password.setPasswordMode(true);
+        confirm = new TextField("", skin);
+        confirm.setPasswordCharacter('*');
+        confirm.setPasswordMode(true);
         enter = new TextButton("Intro", skin);
-        register = new TextButton("Register", skin);
         username.setSize(400,50);
-        username.setPosition(110, 140);
+        username.setPosition(110, 205);
         password.setSize(400,50);
-        password.setPosition(110, 70);
+        password.setPosition(110, 135);
+        confirm.setSize(400, 50);
+        confirm.setPosition(110, 65);
         batch = new SpriteBatch();
         font = new BitmapFont();
         font.setColor(Color.BLACK);
         user = username.getText();
         game.setUser(user);
-
-
+        back = new TextButton("Back", skin);
 
 
         stage = new Stage(new FitViewport(640, 360));
@@ -72,28 +73,27 @@ public class LogIn extends BaseScreen {
 
             public void changed(ChangeEvent event, Actor actor) {
 
-                game.setScreen(game.menuScreen);
+                game.setScreen(game.success);
             }
         });
 
-        register.addCaptureListener(new ChangeListener() {
+        back.addCaptureListener(new ChangeListener() {
 
             public void changed(ChangeEvent event, Actor actor) {
-
-                game.setScreen(game.register);
+                game.setScreen(game.login);
             }
         });
 
         enter.setSize(100, 40);
-        enter.setPosition(260, 20);
-        register.setSize(100,40);
-        register.setPosition(520,20);
+        enter.setPosition(500, 20);
+        back.setSize(40, 20);
+        back.setPosition(10, 340);
 
         stage.addActor(username);
         stage.addActor(password);
+        stage.addActor(confirm);
         stage.addActor(enter);
-        stage.addActor(register);
-
+        stage.addActor(back);
 
     }
 
@@ -131,8 +131,9 @@ public class LogIn extends BaseScreen {
         user = username.getText();
         game.setUser(user);
         batch.begin();
-        font.draw(batch,"User", 110, 270);
-        font.draw(batch, "Password", 110, 180);
+        font.draw(batch,"User", 280, 358);
+        font.draw(batch, "Password", 269,268);
+        font.draw(batch, "Confirm Password", 242,170);
         batch.end();
         stage.act();
         stage.draw();

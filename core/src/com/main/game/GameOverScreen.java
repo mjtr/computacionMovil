@@ -2,6 +2,7 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,6 +22,8 @@ public class GameOverScreen extends BaseScreen {
 
     private Texture background;
 
+    public Sound gOver;
+
     public GameOverScreen(final MyGdxGame game) {
         super(game);
 
@@ -28,10 +31,12 @@ public class GameOverScreen extends BaseScreen {
 
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 
+        gOver = game.getManager().get("GameOver.mp3");
         background = game.getManager().get("GameOver.png");
         retry = new TextButton("Retry", skin);
         menu = new TextButton("Menu", skin);
         ranking = new TextButton("Ranking",skin);
+
 
 
         retry.addCaptureListener(new ChangeListener() {
@@ -74,6 +79,7 @@ public class GameOverScreen extends BaseScreen {
     public void show() {
         background = game.getManager().get("GameOver.png");
         Gdx.input.setInputProcessor(stage);
+        gOver.play();
     }
 
 

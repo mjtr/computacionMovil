@@ -2,8 +2,11 @@ package com.main.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.sun.net.httpserver.Authenticator;
 
 import java.util.List;
 
@@ -14,6 +17,16 @@ public class MyGdxGame extends Game {
 	private AssetManager manager;
 
 	public SpriteBatch batch;
+
+	public Integer getCrono() {
+		return crono;
+	}
+
+	public void setCrono(Integer crono) {
+		this.crono = crono;
+	}
+
+	private Integer crono;
 
 	public String getUser() {
 		return user;
@@ -26,7 +39,10 @@ public class MyGdxGame extends Game {
 	private String user;
 
 	public BaseScreen loadingScreen, menuScreen, gameScreen, endLevelScreen , endLevel2Screen, gameLevel2Screen, gameOverScreen
-			,gameLevel3Screen, selectLevel, ranking, login;
+			,gameLevel3Screen, selectLevel, ranking, login, register, success;
+
+
+
 
 
 	public AssetManager getManager() {
@@ -83,7 +99,11 @@ public class MyGdxGame extends Game {
 		manager.load("turret2.png",Texture.class);
 		manager.load("PantallaCarga.jpg", Texture.class);
 		manager.load("Cargas.png", Texture.class);
-
+		manager.load("Fondo.mp3", Music.class);
+		manager.load("Golpe.mp3", Sound.class);
+		manager.load("GameOver.mp3", Sound.class);
+		manager.load("Hole1.mp3", Sound.class);
+		manager.load("Laser1.mp3", Sound.class);
 
 
 
@@ -108,7 +128,8 @@ public class MyGdxGame extends Game {
 		selectLevel = new SelectLevel(this);
 		ranking = new Ranking(this);
 		login = new LogIn(this);
-
+		register = new Register(this);
+        success = new Success(this);
 		setScreen(login);
 	}
 

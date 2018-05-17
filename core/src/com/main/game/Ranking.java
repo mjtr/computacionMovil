@@ -14,6 +14,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 public class Ranking extends BaseScreen{
     /*
     Primero llamamos a las preferencias:
@@ -41,6 +46,8 @@ public class Ranking extends BaseScreen{
     private Label fifth;
     // private Image logo;
     private Texture background;
+    private SortedMap<Integer, String> clasificacion;
+    private List<String> orden;
 
     Preferences pref = Gdx.app.getPreferences("leaderboard");
 
@@ -49,6 +56,7 @@ public class Ranking extends BaseScreen{
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         back = new TextButton("Back", skin);
+        orden = new ArrayList<String>();
 
         back.addCaptureListener(new ChangeListener() {
 
@@ -64,31 +72,34 @@ public class Ranking extends BaseScreen{
 
         background = game.getManager().get("ranking.png");
 
-        first = new Label("1º PLACE: "+pref.getString("1", "Vamos"), skin);
+
+        first = new Label("1º PLACE: "+pref.getString("1","Pepe    Time: 62"), skin);
         first.setPosition(320 - first.getWidth() / 2, 208 - first.getHeight() / 2);
         stage.addActor(first);
 
-        second = new Label("2º PLACE: "+pref.getString("2","puedes"), skin);
+        second = new Label("2º PLACE: "+pref.getString("2","Alba    Time: 68"), skin);
         second.setPosition(320 - second.getWidth() / 2, 168 - second.getHeight() / 2);
         stage.addActor(second);
 
-        third = new Label("3º PLACE: "+pref.getString("3", "conseguirlo"), skin);
+        third = new Label("3º PLACE: "+pref.getString("3", "Marta    Time: 70"), skin);
         third.setPosition(320 - third.getWidth() / 2, 128 - third.getHeight() / 2);
         stage.addActor(third);
 
-        fourth = new Label("4º PLACE: "+pref.getString("4", "creyendo"), skin);
+        fourth = new Label("4º PLACE: "+pref.getString("4", "Manu    Time: 71"), skin);
         fourth.setPosition(320 - fourth.getWidth() / 2, 88 - fourth.getHeight() / 2);
         stage.addActor(fourth);
 
-        fifth = new Label("5º PLACE: "+pref.getString("5", "en ti"), skin);
+        fifth = new Label("5º PLACE: "+pref.getString("5", ""), skin);
         fifth.setPosition(320 - fifth.getWidth() / 2, 48 - fifth.getHeight() / 2);
         stage.addActor(fifth);
+        clasificacion = new TreeMap<Integer, String>();
     }
 
 
     public void show() {
         background = game.getManager().get("ranking.png");
         Gdx.input.setInputProcessor(stage);
+
     }
 
 
@@ -110,6 +121,7 @@ public class Ranking extends BaseScreen{
         if(Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             game.setScreen(game.menuScreen);
         }
+        //lista();
         stage.getBatch().begin();
         stage.getBatch().draw(background,0, 0,640,360);
         stage.getBatch().end();
@@ -117,4 +129,15 @@ public class Ranking extends BaseScreen{
         stage.draw();
 
     }
+    /*public void lista(){
+
+        clasificacion.put(game.getCrono(), game.getUser());
+
+        Integer x = 0;
+        for (String a : clasificacion.values()) {
+            orden.add(x, a);
+            x++;
+        }
+
+    }*/
 }

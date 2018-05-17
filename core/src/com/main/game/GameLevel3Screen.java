@@ -2,6 +2,8 @@ package com.main.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -31,7 +33,17 @@ import com.main.game.entities.TurretEntity;
 import com.main.game.entities.WallEntity;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.Timer;
+import java.util.TreeMap;
 
 public class GameLevel3Screen extends BaseScreen{
 
@@ -42,7 +54,7 @@ public class GameLevel3Screen extends BaseScreen{
 
     private float health;
 
-    private Sprite fondo;
+    //private Sprite fondo;
 
     private PlayerEntity player;
 
@@ -57,9 +69,17 @@ public class GameLevel3Screen extends BaseScreen{
     private boolean bulletColision = false;
     private boolean bulletHorizontalColision = false;
 
+
+    private Sound golpe, hole, laser;
+
+    private int esperaMuro = 0;
+
     private boolean bulletHorizontalWallColision = false;
 
+
     private float stat;
+
+
 
     private int esperaChocaMoveWall = 1;
 
@@ -87,20 +107,40 @@ public class GameLevel3Screen extends BaseScreen{
     private Texture playerTexture, finishTexture , wallTexture ,holeTexture, impulseWallTexture, destroyWallTexture,
             spikeTexture , spikeRighTexture,spikeLeftTexture , moveWallTexture, turretTexture ;
 
+
+    private Music fondo;
+
+    private Integer crono;
+
+
     //Textura para la vida
     private Texture blank;
 
+
     public GameLevel3Screen(MyGdxGame game) {
         super(game);
+
         stage  = new Stage(new FillViewport(640,360));
         world = new World(new Vector2(0,0), true);
 
         position = new Vector3(stage.getCamera().position);
-        fondo = new Sprite(new Texture("water.jpg"));
+
+        fondo = game.getManager().get("Fondo.mp3");
+        golpe = game.getManager().get("Golpe.mp3");
+        hole = game.getManager().get("Hole1.mp3");
+        laser = game.getManager().get("Laser1.mp3");
+
+
+
+        //fondo = new Sprite(new Texture("water.jpg"));
+
 
     }
 
     public void show() {
+        crono = 0;
+        fondo.setVolume(0.75f);
+        fondo.play();
 
         playerTexture = game.getManager().get("ball.png");
         finishTexture = game.getManager().get("finish2.png");
@@ -111,8 +151,15 @@ public class GameLevel3Screen extends BaseScreen{
         spikeTexture = game.getManager().get("spike.png");
         spikeRighTexture = game.getManager().get("spikeRigh.png");
         spikeLeftTexture = game.getManager().get("spikeLeft.png");
+
+        moveWallTexture = game.getManager().get("circleSpikes4.png");
+        golpe = game.getManager().get("Golpe.mp3");
+        hole = game.getManager().get("Hole1.mp3");
+        laser = game.getManager().get("Laser1.mp3");
+
         moveWallTexture = game.getManager().get("CircleGordo2.png");
         turretTexture = game.getManager().get("turret2.png");
+
 
         blank = new Texture("blank.png");
 
@@ -159,7 +206,7 @@ public class GameLevel3Screen extends BaseScreen{
             public void beginContact(Contact contact) {
 
                 if(areCollided(contact, "player" , "bullets")){
-
+                    laser.play();
                     System.out.println("jugador y bala han colisionado");
                     bulletColision = true;
 
@@ -199,6 +246,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                     if(health > 0 ){
                         health -= 0.1f;
+                        laser.play();
 
                     }else {
 
@@ -262,6 +310,7 @@ public class GameLevel3Screen extends BaseScreen{
 
                     if(health > 0 ){
                         health -= 0.1f;
+                        golpe.play();
 
                     }else {
 
@@ -281,7 +330,7 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact,"player" , "finish")){
-
+                    fondo.stop();
                     stage.addAction(
                             Actions.sequence(
                                     Actions.delay(0.5f),
@@ -297,7 +346,8 @@ public class GameLevel3Screen extends BaseScreen{
                 }
 
                 if(areCollided(contact,"player","hole")){
-
+                    hole.play();
+                    fondo.stop();
                     player.setAlive(false);
 
                     stage.addAction(
@@ -337,6 +387,7 @@ public class GameLevel3Screen extends BaseScreen{
                     player.setChoqueMuro(true);
 
                 }
+
 
             }
 
@@ -455,9 +506,12 @@ public class GameLevel3Screen extends BaseScreen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        fondo.draw(game.batch);
+        //fondo.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //fondo.draw(game.batch);
         game.batch.end();
+
+        crono++;
+        game.setCrono(crono);
 
         stage.act();
         world.step(delta,6,2);
@@ -650,6 +704,8 @@ public class GameLevel3Screen extends BaseScreen{
                 || userDataA.equals(userB) && userDataB.equals(userA) );
 
     }
+
+
 
 
 
