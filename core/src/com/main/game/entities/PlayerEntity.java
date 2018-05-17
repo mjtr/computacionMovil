@@ -90,11 +90,12 @@ public class PlayerEntity extends Actor {
             acelX += Gdx.input.getAccelerometerY();
             acelY -= Gdx.input.getAccelerometerX();
 
+
             if(!hayAcel) {
                 if (choqueMuro == true || spikeCollision == true) {
                     characterX = -characterX * 0.4f;
                     characterY = -characterY * 0.4f;
-
+                    zAngle += -zAngle;
                     //characterX = characterX * 0.1f;
                     //characterY = characterY * 0.1f;
 
@@ -117,12 +118,12 @@ public class PlayerEntity extends Actor {
                 if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN))
                     characterY -= Gdx.graphics.getDeltaTime() * 5;
 
-                body.setLinearVelocity(characterX, characterY);
+                body.setLinearVelocity(characterX, characterY );
 
 
             }else{
 
-                if (choqueMuro == true || spikeCollision == true) {
+                if (choqueMuro == true || spikeCollision == true  ) {
 
                     acelX = -acelX * 0.4f;
                     acelY = -acelY * 0.4f;
@@ -137,7 +138,9 @@ public class PlayerEntity extends Actor {
 
                 }
 
-                body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f);
+                body.setLinearVelocity(acelX * 0.04f, acelY * 0.01f );
+                body.setAngularVelocity(zAngle);
+
 
             }
 
